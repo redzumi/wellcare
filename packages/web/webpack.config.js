@@ -24,7 +24,8 @@ const config = {
     extensions: ['.ts', '.tsx', '.js', '.css', '.styl'],
     alias: {
       common: path.resolve(__dirname, 'src/common/'),
-      modules: path.resolve(__dirname, 'src/modules/')
+      modules: path.resolve(__dirname, 'src/modules/'),
+      store: path.resolve(__dirname, 'src/store/'),
     }
   },
   module: {
@@ -47,6 +48,31 @@ const config = {
             }
           },
           'stylus-loader'
+        ]
+      },
+      {
+        test: /\.less$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          {
+            loader: 'css-loader'
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              lessOptions: {
+                modifyVars: {
+                  'primary-color': '#5ABA4A',
+                  'link-color': '#63C8F2',
+                  'border-radius-base': '2px',
+                  'layout-header-background': '#ffffff'
+                },
+                javascriptEnabled: true
+              }
+            }
+          }
         ]
       }
     ]
