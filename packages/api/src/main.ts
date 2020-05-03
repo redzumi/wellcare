@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 
 const app = express();
 const PORT = 4000;
-const URL = process.env.DB_URL || 'localhost:27017';
+const URL = process.env.DB_URL || 'localhost:27018';
 
 console.log(`DB url: ${URL}`);
 

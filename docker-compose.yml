@@ -13,7 +13,7 @@ services:
     command: mongod
     image: mongo:3.2.0
     ports:
-      - '27100:27017'
+      - '27100:27018'
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     logging:
