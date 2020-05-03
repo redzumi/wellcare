@@ -24,7 +24,8 @@ const config = {
     extensions: ['.ts', '.tsx', '.js', '.css', '.styl'],
     alias: {
       common: path.resolve(__dirname, 'src/common/'),
-      modules: path.resolve(__dirname, 'src/modules/')
+      modules: path.resolve(__dirname, 'src/modules/'),
+      store: path.resolve(__dirname, 'src/store/'),
     }
   },
   module: {
