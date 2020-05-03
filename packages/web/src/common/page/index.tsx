@@ -16,14 +16,12 @@ const { Content } = Layout;
 
 const Page = (props: Props) => {
   const { children, media } = props;
-
   const isMobile = media === UIMedia.Mobile;
-  const layoutOffset = isMobile ? 80 : 200; // TODO: use constants
 
   return (
     <Layout>
       <Sidebar collapsed={isMobile} />
-      <Layout style={{ marginLeft: layoutOffset }}>
+      <Layout className={styles.layout}>
         <Header />
         <Content className={styles.page}>
           <PageHeader title="Home" backIcon={false} />

@@ -13,6 +13,7 @@
     "jsx": "react",
     "lib": ["es6", "es2015", "dom"],
     "paths": {
+      "src/*": ["src/*"],
       "common/*": ["common/*"],
       "modules/*": ["modules/*"],
       "store/*": ["store/*"]

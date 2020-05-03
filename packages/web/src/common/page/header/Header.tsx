@@ -8,14 +8,14 @@ const { Header } = Layout;
 const PageHeader = () => {
   return (
     <Header className={styles.header}>
-      <Row>
+      <Row justify="space-between" className={styles.row}>
         <Col>
           <Breadcrumb className={styles.breadcrumb}>
             <Breadcrumb.Item>Wellcare</Breadcrumb.Item>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
           </Breadcrumb>
         </Col>
-        <Col></Col>
+        <Col>Test</Col>
       </Row>
     </Header>
   );
