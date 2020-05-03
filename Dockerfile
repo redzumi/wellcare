@@ -4,5 +4,5 @@ COPY package*.json ./
 RUN npm cache clean --force
 RUN npm install
 COPY . .
-EXPOSE 3000 4000
+EXPOSE 3003 4003
 CMD [ "npm", "run", "ci" ]
