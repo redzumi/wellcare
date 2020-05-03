@@ -12,11 +12,11 @@
   },
   "license": "MIT",
   "dependencies": {
-    "prettier": "^2.0.5",
     "rimraf": "^3.0.2",
     "typescript": "^3.8.3"
   },
   "devDependencies": {
+    "prettier": "^2.0.5",
     "typescript": "^3.8.3"
   }
 }

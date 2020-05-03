@@ -3,6 +3,7 @@ import { Drawer, Space, Button, Row, Col, Layout } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import { useStore } from 'effector-react';
 
+import { $ui } from 'store/ui';
 import styles from './styles.styl';
 
 import Logo from '../logo/Logo';
@@ -10,8 +11,6 @@ import Menu from '../menu/Menu';
 
 import Profile from './Profile';
 import Notifications from './Notifications';
-
-import { $ui } from 'store/ui';
 
 const { Header } = Layout;
 

@@ -8,7 +8,8 @@
     "prebuild": "rimraf dist",
     "build": "tsc",
     "dev": "tsc-watch --onSuccess 'node dist/main.js'",
-    "start": "cross-env DB_URL=mongo:27017 node dist/main.js"
+    "start": "cross-env DB_URL=mongo:27017 node dist/main.js",
+    "lint": "prettier --write src/"
   },
   "license": "MIT",
   "dependencies": {
@@ -29,6 +30,7 @@
     "@types/mongoose": "^5.7.14",
     "@types/morgan": "^1.9.0",
     "@types/uuid": "^7.0.3",
+    "prettier": "^2.0.5",
     "typescript": "^3.8.3"
   }
 }

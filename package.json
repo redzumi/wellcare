@@ -6,9 +6,11 @@
     "build": "lerna exec npm run build",
     "start": "lerna run --parallel start",
     "ci": "npm run bootstrap && npm run build && npm run start",
-    "test": "echo \"Everything gonna be okay\""
+    "test": "echo \"Everything gonna be okay\"",
+    "lint": "lerna exec npm run lint"
   },
   "devDependencies": {
+    "husky": "^4.2.5",
     "lerna": "^3.20.2"
   }
 }
