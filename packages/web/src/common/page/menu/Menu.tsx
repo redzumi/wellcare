@@ -1,50 +1,63 @@
 import React from 'react';
 import { Menu } from 'antd';
 import {
-  AppstoreOutlined,
+  HomeOutlined,
   BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
-  TeamOutlined,
-  UserOutlined,
-  UploadOutlined,
-  VideoCameraOutlined
+  EyeOutlined,
+  ReadOutlined,
+  CheckCircleOutlined,
+  CoffeeOutlined
 } from '@ant-design/icons';
 
 import styles from './styles.styl';
 
-const PageMenu = () => {
+type Props = {
+  horizontal?: boolean;
+};
+
+const MENU = [
+  {
+    id: 1,
+    name: 'Главная',
+    icon: <HomeOutlined />
+  },
+  {
+    id: 2,
+    name: 'Тестирование',
+    icon: <EyeOutlined />
+  },
+  {
+    id: 3,
+    name: 'Статьи',
+    icon: <ReadOutlined />
+  },
+  {
+    id: 4,
+    name: 'Рекомендации',
+    icon: <CheckCircleOutlined />
+  },
+  {
+    id: 5,
+    name: 'Прочее',
+    icon: <BarChartOutlined />
+  },
+  {
+    id: 6,
+    name: 'О нас',
+    icon: <CoffeeOutlined />
+  }
+];
+
+const PageMenu = (props: Props) => {
+  const { horizontal } = props;
+
   return (
-    <Menu
-      theme="light"
-      className={styles.menu}
-      mode="inline"
-      defaultSelectedKeys={['4']}
-    >
-      <Menu.Item key="1" icon={<UserOutlined />}>
-        nav 1
-      </Menu.Item>
-      <Menu.Item key="2" icon={<VideoCameraOutlined />}>
-        nav 2
-      </Menu.Item>
-      <Menu.Item key="3" icon={<UploadOutlined />}>
-        nav 3
-      </Menu.Item>
-      <Menu.Item key="4" icon={<BarChartOutlined />}>
-        nav 4
-      </Menu.Item>
-      <Menu.Item key="5" icon={<CloudOutlined />}>
-        nav 5
-      </Menu.Item>
-      <Menu.Item key="6" icon={<AppstoreOutlined />}>
-        nav 6
-      </Menu.Item>
-      <Menu.Item key="7" icon={<TeamOutlined />}>
-        nav 7
-      </Menu.Item>
-      <Menu.Item key="8" icon={<ShopOutlined />}>
-        nav 8
-      </Menu.Item>
+    <Menu className={styles.menu} mode={horizontal ? 'horizontal' : 'vertical'}>
+      {MENU.map((menu) => (
+        <Menu.Item key={menu.id} icon={menu.icon}>
+          {menu.name}
+        </Menu.Item>
+      ))}
     </Menu>
   );
 };

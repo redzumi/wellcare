@@ -8,7 +8,6 @@ import {
   Row,
   Col,
   Layout,
-  Breadcrumb,
   Popover,
   Empty
 } from 'antd';
@@ -17,12 +16,19 @@ import {
   MenuOutlined,
   NotificationOutlined
 } from '@ant-design/icons';
+import { useStore } from 'effector-react';
 
 import styles from './styles.styl';
+
+import Logo from '../logo/Logo';
+import Menu from '../menu/Menu';
+
+import { $ui } from 'store/ui';
 
 const { Header } = Layout;
 
 const PageHeader = () => {
+  const ui = useStore($ui);
   const [drawer, setDrawer] = useState(false);
 
   const handleMenuClick = () => setDrawer(true);
@@ -33,14 +39,16 @@ const PageHeader = () => {
       <Header className={styles.header}>
         <Row justify="space-between" className={styles.row}>
           <Col>
-            <Breadcrumb className={styles.breadcrumb}>
-              <Breadcrumb.Item>Wellcare</Breadcrumb.Item>
-              <Breadcrumb.Item>Home</Breadcrumb.Item>
-            </Breadcrumb>
+            <Logo />
           </Col>
+          {ui.media === UIMedia.Desktop && (
+            <Col>
+              <Menu horizontal />
+            </Col>
+          )}
           <Col>
             <Space align="center">
-              <Avatar className={styles.avatar} icon={<UserOutlined />} />
+              <Avatar icon={<UserOutlined />} />
               <Popover
                 placement="bottomRight"
                 content={<Empty />}
@@ -50,15 +58,21 @@ const PageHeader = () => {
                   <Button icon={<NotificationOutlined />} />
                 </Badge>
               </Popover>
-              <Button icon={<MenuOutlined />} onClick={handleMenuClick} />
+              {ui.media === UIMedia.Mobile && (
+                <Button icon={<MenuOutlined />} onClick={handleMenuClick} />
+              )}
             </Space>
           </Col>
         </Row>
       </Header>
-      <Drawer placement="right" onClose={handleDrawerClose} visible={drawer}>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
-        <p>Some contents...</p>
+      <Drawer
+        placement="right"
+        className={styles.drawer}
+        closable={false}
+        onClose={handleDrawerClose}
+        visible={drawer}
+      >
+        <Menu />
       </Drawer>
     </React.Fragment>
   );

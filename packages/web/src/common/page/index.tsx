@@ -2,7 +2,6 @@ import React from 'react';
 import { Layout, PageHeader } from 'antd';
 
 import Header from './header/Header';
-import Sidebar from './sidebar/Sidebar';
 import Footer from './footer/Footer';
 
 import styles from './styles.styl';
@@ -20,8 +19,7 @@ const Page = (props: Props) => {
 
   return (
     <Layout>
-      <Sidebar collapsed={isMobile} />
-      <Layout className={styles.layout}>
+      <Layout>
         <Header />
         <Content className={styles.page}>
           <PageHeader title="Home" backIcon={false} />
