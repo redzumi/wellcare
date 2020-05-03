@@ -1,0 +1,16 @@
+{
+  "name": "core",
+  "version": "0.0.0",
+  "main": "dist/main.js",
+  "scripts": {
+    "prewatch": "rimraf dist",
+    "watch": "tsc -w",
+    "prebuild": "rimraf dist",
+    "build": "tsc",
+    "start": "node dist/main.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "rimraf": "^3.0.2"
+  }
+}

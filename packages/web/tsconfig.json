@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "outDir": "./public/",
+    "baseUrl": "./src/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "target": "es5",
+    "jsx": "react",
+    "lib": ["es6", "es2015", "dom"],
+    "paths": {
+      "common/*": ["common/*"],
+      "modules/*": ["modules/*"]
+    }
+  },
+  "include": ["./src/**/*"],
+  "exclude": ["node_modules"]
+}

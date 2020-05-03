@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "sourceMap": false,
+    "lib": [],
+    "noImplicitAny": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true
+  }
+}
