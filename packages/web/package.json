@@ -17,6 +17,7 @@
     "terser": "4.6.13"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.1.0",
     "antd": "^4.2.0",
     "classnames": "^2.2.6",
     "cross-env": "^7.0.2",
