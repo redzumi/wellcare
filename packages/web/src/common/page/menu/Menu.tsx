@@ -6,12 +6,16 @@ import {
   EyeOutlined,
   ReadOutlined,
   CheckCircleOutlined,
-  CoffeeOutlined
+  CoffeeOutlined,
+  UserOutlined,
+  SettingOutlined,
+  LogoutOutlined
 } from '@ant-design/icons';
 
 import styles from './styles.styl';
 
 type Props = {
+  withProfile?: boolean;
   horizontal?: boolean;
 };
 
@@ -49,15 +53,33 @@ const MENU = [
 ];
 
 const PageMenu = (props: Props) => {
-  const { horizontal } = props;
+  const { horizontal, withProfile } = props;
 
+  // TODO: make menu better
   return (
     <Menu className={styles.menu} mode={horizontal ? 'horizontal' : 'vertical'}>
+      {withProfile && (
+        <Menu.Item key="profile" icon={<UserOutlined />}>
+          Профиль
+        </Menu.Item>
+      )}
+      {withProfile && <Menu.Divider />}
       {MENU.map((menu) => (
         <Menu.Item key={menu.id} icon={menu.icon}>
           {menu.name}
         </Menu.Item>
       ))}
+      {withProfile && <Menu.Divider />}
+      {withProfile && (
+        <Menu.Item key="settings" icon={<SettingOutlined />}>
+          Настройки
+        </Menu.Item>
+      )}
+      {withProfile && (
+        <Menu.Item key="logout" icon={<LogoutOutlined />}>
+          Выйти
+        </Menu.Item>
+      )}
     </Menu>
   );
 };

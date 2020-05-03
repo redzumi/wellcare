@@ -1,27 +1,15 @@
 import React, { useState } from 'react';
-import {
-  Drawer,
-  Avatar,
-  Badge,
-  Space,
-  Button,
-  Row,
-  Col,
-  Layout,
-  Popover,
-  Empty
-} from 'antd';
-import {
-  UserOutlined,
-  MenuOutlined,
-  NotificationOutlined
-} from '@ant-design/icons';
+import { Drawer, Space, Button, Row, Col, Layout } from 'antd';
+import { MenuOutlined } from '@ant-design/icons';
 import { useStore } from 'effector-react';
 
 import styles from './styles.styl';
 
 import Logo from '../logo/Logo';
 import Menu from '../menu/Menu';
+
+import Profile from './Profile';
+import Notifications from './Notifications';
 
 import { $ui } from 'store/ui';
 
@@ -48,16 +36,8 @@ const PageHeader = () => {
           )}
           <Col>
             <Space align="center">
-              <Avatar icon={<UserOutlined />} />
-              <Popover
-                placement="bottomRight"
-                content={<Empty />}
-                trigger="click"
-              >
-                <Badge dot>
-                  <Button icon={<NotificationOutlined />} />
-                </Badge>
-              </Popover>
+              <Notifications />
+              {ui.media === UIMedia.Desktop && <Profile />}
               {ui.media === UIMedia.Mobile && (
                 <Button icon={<MenuOutlined />} onClick={handleMenuClick} />
               )}
@@ -72,7 +52,7 @@ const PageHeader = () => {
         onClose={handleDrawerClose}
         visible={drawer}
       >
-        <Menu />
+        <Menu withProfile />
       </Drawer>
     </React.Fragment>
   );
