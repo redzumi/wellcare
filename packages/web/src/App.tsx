@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { setUIMedia } from 'store/ui';
 import Hello from 'modules/hello';
 
-const MOBILE_BREAKPOINT = 770;
+const MOBILE_BREAKPOINT = 910;
 
 const getCurrentMedia = () =>
   window.matchMedia(`(min-width: ${MOBILE_BREAKPOINT}px)`).matches

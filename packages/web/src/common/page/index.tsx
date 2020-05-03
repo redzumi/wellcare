@@ -2,8 +2,9 @@ import React from 'react';
 import { Layout, PageHeader } from 'antd';
 
 import Header from './header/Header';
-import Sidebar from './sidebar/Sidebar';
 import Footer from './footer/Footer';
+
+import styles from './styles.styl';
 
 type Props = {
   children?: React.ReactNode;
@@ -14,24 +15,17 @@ const { Content } = Layout;
 
 const Page = (props: Props) => {
   const { children, media } = props;
-
   const isMobile = media === UIMedia.Mobile;
-  const layoutOffset = isMobile ? 80 : 200; // TODO: use constants
 
   return (
     <Layout>
-      <Sidebar collapsed={isMobile} />
-      <Layout style={{ marginLeft: layoutOffset }}>
+      <Layout className={styles.layout}>
         <Header />
-        <Content
-          style={{
-            margin: '24px 16px 0',
-            overflow: 'initial',
-            background: '#fff'
-          }}
-        >
-          <PageHeader title="Home" backIcon={false} />
-          <div style={{ padding: 24, textAlign: 'center' }}>{children}</div>
+        <Content className={styles.content}>
+          <div className={styles.container}>
+            <PageHeader title="Home" backIcon={false} />
+            <div className={styles.body}>{children}</div>
+          </div>
         </Content>
         <Footer />
       </Layout>

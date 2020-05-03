@@ -23,9 +23,10 @@ const config = {
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.css', '.styl'],
     alias: {
+      src: path.resolve(__dirname, 'src/'),
       common: path.resolve(__dirname, 'src/common/'),
       modules: path.resolve(__dirname, 'src/modules/'),
-      store: path.resolve(__dirname, 'src/store/'),
+      store: path.resolve(__dirname, 'src/store/')
     }
   },
   module: {
@@ -53,12 +54,8 @@ const config = {
       {
         test: /\.less$/,
         use: [
-          {
-            loader: 'style-loader'
-          },
-          {
-            loader: 'css-loader'
-          },
+          MiniCssExtractPlugin.loader,
+          { loader: 'css-loader' },
           {
             loader: 'less-loader',
             options: {

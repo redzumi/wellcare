@@ -1,13 +1,13 @@
 import React from 'react';
 import { Layout } from 'antd';
 
+import styles from './styles.styl';
+
 const { Footer } = Layout;
 
 const PageFooter = () => {
   return (
-    <Footer style={{ textAlign: 'center' }}>
-      Made with ❤️by WellCare Team
-    </Footer>
+    <Footer className={styles.footer}>Made with ❤️by Wellcare Team</Footer>
   );
 };
 

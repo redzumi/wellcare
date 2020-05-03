@@ -1,16 +1,11 @@
 import React from 'react';
 
+import styles from './styles.styl';
+
 const Logo = () => {
   return (
-    <div
-      style={{
-        height: 64,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}
-    >
-      <div style={{ background: '#5ABA4A', width: 140, height: 40 }}></div>
+    <div className={styles.wrapper}>
+      <div className={styles.logo}></div>
     </div>
   );
 };
