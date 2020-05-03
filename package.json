@@ -3,13 +3,12 @@
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",
-    "build": "lerna exec yarn build",
+    "build": "lerna exec npm run build",
     "start": "lerna run --parallel start",
     "ci": "npm run bootstrap && npm run build && npm run start",
     "test": "echo \"Everything gonna be okay\""
   },
   "devDependencies": {
-    "lerna": "^3.20.2",
-    "typescript": "^3.8.3"
+    "lerna": "^3.20.2"
   }
 }

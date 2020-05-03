@@ -8,7 +8,7 @@ pipeline {
         }
         stage('Tests') {
             steps {
-                sh 'docker-compose run -T frontend yarn test'
+                sh 'docker-compose run -T frontend npm run test'
             }
         }
         stage('Run') {

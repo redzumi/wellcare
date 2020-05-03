@@ -1,4 +1,3 @@
 public
 *.styl.d.ts
-yarn.lock
 stats.json

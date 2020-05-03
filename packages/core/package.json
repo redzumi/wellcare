@@ -13,6 +13,10 @@
   "license": "MIT",
   "dependencies": {
     "prettier": "^2.0.5",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "typescript": "^3.8.3"
+  },
+  "devDependencies": {
+    "typescript": "^3.8.3"
   }
 }
