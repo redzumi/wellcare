@@ -5,6 +5,8 @@ import Header from './header/Header';
 import Sidebar from './sidebar/Sidebar';
 import Footer from './footer/Footer';
 
+import styles from './styles.styl';
+
 type Props = {
   children?: React.ReactNode;
   media: UIMedia;
@@ -23,15 +25,9 @@ const Page = (props: Props) => {
       <Sidebar collapsed={isMobile} />
       <Layout style={{ marginLeft: layoutOffset }}>
         <Header />
-        <Content
-          style={{
-            margin: '24px 16px 0',
-            overflow: 'initial',
-            background: '#fff'
-          }}
-        >
+        <Content className={styles.page}>
           <PageHeader title="Home" backIcon={false} />
-          <div style={{ padding: 24, textAlign: 'center' }}>{children}</div>
+          <div className={styles.content}>{children}</div>
         </Content>
         <Footer />
       </Layout>

@@ -4,6 +4,8 @@ import { Layout } from 'antd';
 import Menu from '../menu/Menu';
 import Logo from '../logo/Logo';
 
+import styles from './styles.styl';
+
 type Props = {
   collapsed: boolean;
 };
@@ -14,16 +16,7 @@ const PageSidebar = (props: Props) => {
   const { collapsed } = props;
 
   return (
-    <Sider
-      collapsed={collapsed}
-      style={{
-        overflow: 'auto',
-        height: '100vh',
-        position: 'fixed',
-        left: 0,
-        borderRight: '1px solid #f0f0f0'
-      }}
-    >
+    <Sider collapsed={collapsed} className={styles.sidebar}>
       <Logo />
       <Menu />
     </Sider>

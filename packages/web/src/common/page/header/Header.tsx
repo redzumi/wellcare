@@ -1,22 +1,22 @@
 import React from 'react';
-import { Layout, Breadcrumb } from 'antd';
+import { Row, Col, Layout, Breadcrumb } from 'antd';
+
+import styles from './styles.styl';
 
 const { Header } = Layout;
 
 const PageHeader = () => {
   return (
-    <Header>
-      <Breadcrumb
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100%'
-        }}
-      >
-        <Breadcrumb.Item>WellCare</Breadcrumb.Item>
-        <Breadcrumb.Item>Home</Breadcrumb.Item>
-      </Breadcrumb>
+    <Header className={styles.header}>
+      <Row>
+        <Col>
+          <Breadcrumb className={styles.breadcrumb}>
+            <Breadcrumb.Item>WellCare</Breadcrumb.Item>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
+        <Col></Col>
+      </Row>
     </Header>
   );
 };

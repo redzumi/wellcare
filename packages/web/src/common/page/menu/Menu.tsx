@@ -11,11 +11,13 @@ import {
   VideoCameraOutlined
 } from '@ant-design/icons';
 
+import styles from './styles.styl';
+
 const PageMenu = () => {
   return (
     <Menu
       theme="light"
-      style={{ border: 'none' }}
+      className={styles.menu}
       mode="inline"
       defaultSelectedKeys={['4']}
     >
