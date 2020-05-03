@@ -27,8 +27,10 @@ const PageHeader = () => {
         <Row justify="space-between" className={styles.row}>
           <Col>
             <Row>
-              <Logo />
-              {ui.media === UIMedia.Desktop && <Menu horizontal />}
+              <Space size="middle">
+                <Logo />
+                {ui.media === UIMedia.Desktop && <Menu horizontal />}
+              </Space>
             </Row>
           </Col>
           <Col>
