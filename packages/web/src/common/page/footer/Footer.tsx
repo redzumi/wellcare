@@ -6,7 +6,7 @@ const { Footer } = Layout;
 const PageFooter = () => {
   return (
     <Footer style={{ textAlign: 'center' }}>
-      Made with love by WellCare Team
+      Made with ❤️by WellCare Team
     </Footer>
   );
 };

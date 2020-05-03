@@ -9,11 +9,10 @@ import Page from 'common/page';
 const Hello = () => {
   const ui = useStore($ui);
 
-  console.log(ui);
-
   return (
-    <Page>
+    <Page media={ui.media}>
       Hello from wellcare
+      {ui.media}
       <DatePicker />
       <Button type="primary" style={{ marginLeft: 8 }}>
         Primary Button

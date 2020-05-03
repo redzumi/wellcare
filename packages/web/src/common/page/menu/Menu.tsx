@@ -13,7 +13,12 @@ import {
 
 const PageMenu = () => {
   return (
-    <Menu theme="light" mode="inline" defaultSelectedKeys={['4']}>
+    <Menu
+      theme="light"
+      style={{ border: 'none' }}
+      mode="inline"
+      defaultSelectedKeys={['4']}
+    >
       <Menu.Item key="1" icon={<UserOutlined />}>
         nav 1
       </Menu.Item>
