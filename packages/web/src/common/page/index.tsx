@@ -19,11 +19,13 @@ const Page = (props: Props) => {
 
   return (
     <Layout>
-      <Layout>
+      <Layout className={styles.layout}>
         <Header />
-        <Content className={styles.page}>
-          <PageHeader title="Home" backIcon={false} />
-          <div className={styles.content}>{children}</div>
+        <Content className={styles.content}>
+          <div className={styles.container}>
+            <PageHeader title="Home" backIcon={false} />
+            <div className={styles.body}>{children}</div>
+          </div>
         </Content>
         <Footer />
       </Layout>
