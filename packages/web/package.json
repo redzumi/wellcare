@@ -1,6 +1,6 @@
 {
   "name": "web",
-  "version": "0.0.0",
+  "version": "0.1.0-alpha.0",
   "scripts": {
     "lint": "tsc --noEmit && eslint 'src/**/*.{js,ts,tsx}' --ignore-pattern '*.d.ts' --fix",
     "prebuild": "rimraf public && npm run build:server",
