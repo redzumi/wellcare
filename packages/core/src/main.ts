@@ -1,5 +1,5 @@
-import data from "../data";
-import { PredictData } from "../data";
+import data from './data';
+import { PredictData } from './data';
 
 const main = async () => await estimateCovid(data);
 
@@ -9,6 +9,9 @@ const estimateCovid = (data: PredictData) => {
     (prob, current) => prob + current[1] * current[2],
     0
   );
+
+  console.log(overallProbability);
+
   return overallProbability;
 };
 
