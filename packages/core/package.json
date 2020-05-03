@@ -7,10 +7,12 @@
     "watch": "tsc -w",
     "prebuild": "rimraf dist",
     "build": "tsc",
-    "start": "node dist/main.js"
+    "start": "node dist/main.js",
+    "lint": "prettier --write src/"
   },
   "license": "MIT",
   "dependencies": {
+    "prettier": "^2.0.5",
     "rimraf": "^3.0.2"
   }
 }
