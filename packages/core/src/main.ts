@@ -1,21 +1,12 @@
 import data from '../data';
+import {PredictData} from '../data';
 
-type Question = [string, number, number]
+const main = async () => await estimateCovid(data);
 
-type PredictData = Question[]
-
-const main = async () => {
-  //@ts-ignore
-  await estimateCovid(data);
-}
 //функция, которая принимает признак, вес, вес ответа и возвращает вероятность
 const estimateCovid = (data:PredictData) => {
-
-  const overallProbability = data
-  .reduce((prob, current) => prob + current[1] * current[2] ,0);
-
+  const overallProbability = data.reduce((prob, current) => prob + current[1] * current[2] ,0);
   return overallProbability;
-
 }
 
 main();
