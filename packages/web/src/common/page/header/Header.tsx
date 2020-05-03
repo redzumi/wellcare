@@ -11,7 +11,7 @@ const PageHeader = () => {
       <Row>
         <Col>
           <Breadcrumb className={styles.breadcrumb}>
-            <Breadcrumb.Item>WellCare</Breadcrumb.Item>
+            <Breadcrumb.Item>Wellcare</Breadcrumb.Item>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
           </Breadcrumb>
         </Col>

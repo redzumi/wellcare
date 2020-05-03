@@ -7,7 +7,7 @@ const { Footer } = Layout;
 
 const PageFooter = () => {
   return (
-    <Footer className={styles.footer}>Made with ❤️by WellCare Team</Footer>
+    <Footer className={styles.footer}>Made with ❤️by Wellcare Team</Footer>
   );
 };
 
