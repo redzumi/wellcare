@@ -5,8 +5,8 @@ services:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - '3003:3003'
-      - '4003:4003'
+      - '3003:3000'
+      - '4003:4000'
     depends_on:
       - mongo
   mongo:
