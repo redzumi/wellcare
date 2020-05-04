@@ -8,14 +8,13 @@ import styles from './styles.styl';
 
 type Props = {
   children?: React.ReactNode;
-  media: UIMedia;
+  title?: string;
 };
 
 const { Content } = Layout;
 
 const Page = (props: Props) => {
-  const { children, media } = props;
-  const isMobile = media === UIMedia.Mobile;
+  const { children, title } = props;
 
   return (
     <Layout>
@@ -23,7 +22,7 @@ const Page = (props: Props) => {
         <Header />
         <Content className={styles.content}>
           <div className={styles.container}>
-            <PageHeader title="Home" backIcon={false} />
+            <PageHeader title={title} backIcon={false} />
             <div className={styles.body}>{children}</div>
           </div>
         </Content>

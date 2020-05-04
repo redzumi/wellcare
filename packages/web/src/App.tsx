@@ -1,8 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
 import { setUIMedia } from 'store/ui';
-import Hello from 'modules/hello';
+import { ROTES } from 'routes';
 
 const MOBILE_BREAKPOINT = 920;
 
@@ -22,9 +21,13 @@ const registerResizeListener = () => {
 const App = () => (
   <Router>
     <Switch>
-      <Route path="/">
-        <Hello />
-      </Route>
+      {ROTES.map((route) => (
+        <Route
+          key={route.pathname}
+          path={route.pathname}
+          component={route.module}
+        />
+      ))}
     </Switch>
   </Router>
 );

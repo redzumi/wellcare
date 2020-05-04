@@ -26,7 +26,8 @@ const config = {
       src: path.resolve(__dirname, 'src/'),
       common: path.resolve(__dirname, 'src/common/'),
       modules: path.resolve(__dirname, 'src/modules/'),
-      store: path.resolve(__dirname, 'src/store/')
+      store: path.resolve(__dirname, 'src/store/'),
+      routes: path.resolve(__dirname, 'src/routes')
     }
   },
   module: {
