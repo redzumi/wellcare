@@ -28,13 +28,13 @@ const TEST: Test = {
 };
 
 const CreateTest = () => {
-  const handleChange = () => {
-    console.log('changes by 2pac');
+  const handleSave = (value: Test) => {
+    console.log(value);
   };
 
   return (
     <Paper title="Создать тест">
-      <EditableTest test={TEST} onChange={handleChange} />
+      <EditableTest test={TEST} onSave={handleSave} />
     </Paper>
   );
 };

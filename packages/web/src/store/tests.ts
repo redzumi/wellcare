@@ -4,7 +4,35 @@ import { createStore, createEffect, Store } from 'effector';
 
 type CreateData = {} & Test;
 
-const $tests: Store<TestsState> = createStore({ ready: false, data: [] });
+const $tests: Store<TestsState> = createStore({
+  ready: false,
+  data: [
+    {
+      id: '1',
+      name: 'test',
+      description: 'test',
+      weight: 1,
+      questions: [],
+      reward: 1
+    },
+    {
+      id: '1',
+      name: 'test',
+      description: 'test',
+      weight: 1,
+      questions: [],
+      reward: 1
+    },
+    {
+      id: '1',
+      name: 'test',
+      description: 'test',
+      weight: 1,
+      questions: [],
+      reward: 1
+    }
+  ]
+});
 
 const fetchTests = createEffect<void, Test[]>({
   handler: async () => {

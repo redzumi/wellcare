@@ -18,6 +18,7 @@ const Tests = () => {
   const tests = useStore($tests);
 
   const handleCreateClick = () => history.push('/tests/new');
+  const handleTestClick = (id: string) => () => history.push(`/tests/${id}`);
 
   useEffect(() => {
     fetchTests();
@@ -52,6 +53,7 @@ const Tests = () => {
                       key={test.id}
                       title={test.name}
                       description={test.description}
+                      onClick={handleTestClick(test.id)}
                     />
                   ))}
                 </Space>

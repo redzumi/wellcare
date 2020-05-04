@@ -30,6 +30,10 @@ const columns = [
 
 const QuestionsTable = (props: Props) => {
   const { questions, onChange } = props;
+  const questionsWithKeys = questions.map((question) => ({
+    ...question,
+    key: question.name
+  }));
 
   const handleCreateQuestion = (name: string, weight: number) => {
     const question: Question = { name, weight, answers: [] };
@@ -41,7 +45,7 @@ const QuestionsTable = (props: Props) => {
     <React.Fragment>
       <QuestionForm onFinish={handleCreateQuestion} />
       <Divider dashed />
-      <Table columns={columns} dataSource={questions} />
+      <Table columns={columns} dataSource={questionsWithKeys} />
     </React.Fragment>
   );
 };

@@ -10,15 +10,24 @@ type Props = {
   name: string;
   description: string;
   onChange: (values: Store) => void;
+  onFinish: () => void;
 };
 
 const { TextArea } = Input;
 
 const DataForm = (props: Props) => {
-  const { id, name, description, onChange } = props;
+  const { id, name, description, onChange, onFinish } = props;
 
   return (
-    <Form name="survey" onFinish={onChange}>
+    <Form
+      name="survey"
+      initialValues={{
+        name,
+        description
+      }}
+      onValuesChange={onChange}
+      onFinish={onFinish}
+    >
       <Space direction="vertical" className={styles.form}>
         <Form.Item
           label="Название теста"
@@ -30,7 +39,7 @@ const DataForm = (props: Props) => {
             }
           ]}
         >
-          <Input value={name} />
+          <Input />
         </Form.Item>
         <Form.Item
           label="Описание теста"
@@ -42,7 +51,7 @@ const DataForm = (props: Props) => {
             }
           ]}
         >
-          <TextArea rows={4} value={description} />
+          <TextArea rows={4} />
         </Form.Item>
         <Form.Item>
           <Space>
