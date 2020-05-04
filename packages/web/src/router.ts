@@ -1,5 +1,6 @@
 import Home from 'modules/home';
 import Tests from 'modules/tests';
+import CreateTest from 'modules/tests/create/CreateTest';
 import Recommends from 'modules/recommends';
 import Articles from 'modules/articles';
 import Etc from 'modules/etc';
@@ -19,6 +20,7 @@ import {
 export const ROUTES = [
   { pathname: '/', module: Home },
   { pathname: '/tests', module: Tests },
+  { pathname: '/tests/new', module: CreateTest },
   { pathname: '/tests/:id', module: Tests },
   { pathname: '/recommends', module: Recommends },
   { pathname: '/articles', module: Articles },
