@@ -57,6 +57,8 @@ const checkSession = createEffect<void, string>({
       throw new Error('Сессия устарела...');
     }
 
+    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+
     return token;
   }
 });

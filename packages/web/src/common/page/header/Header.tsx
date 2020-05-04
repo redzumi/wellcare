@@ -4,6 +4,8 @@ import { MenuOutlined } from '@ant-design/icons';
 import { useStore } from 'effector-react';
 
 import { $ui } from 'store/ui';
+import { $session } from 'store/session';
+
 import styles from './styles.styl';
 
 import Logo from '../logo/Logo';
@@ -16,6 +18,7 @@ const { Header } = Layout;
 
 const PageHeader = () => {
   const ui = useStore($ui);
+  const session = useStore($session);
   const [drawer, setDrawer] = useState(false);
 
   const handleMenuClick = () => setDrawer(true);
@@ -36,13 +39,15 @@ const PageHeader = () => {
             </Row>
           </Col>
           <Col>
-            <Space align="center">
-              <Notifications />
-              <Profile />
-              {ui.media === UIMedia.Mobile && (
-                <Button icon={<MenuOutlined />} onClick={handleMenuClick} />
-              )}
-            </Space>
+            {session.token && (
+              <Space align="center">
+                <Notifications />
+                <Profile />
+                {ui.media === UIMedia.Mobile && (
+                  <Button icon={<MenuOutlined />} onClick={handleMenuClick} />
+                )}
+              </Space>
+            )}
           </Col>
         </Row>
       </Header>

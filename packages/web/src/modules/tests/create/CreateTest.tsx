@@ -65,7 +65,7 @@ const CreateTest = () => {
   };
 
   return (
-    <Paper>
+    <Paper title="Создать тест">
       <Form
         name="survey"
         onFinish={handleAddingSurvey}
