@@ -5,10 +5,13 @@ import {
   SettingOutlined,
   LogoutOutlined
 } from '@ant-design/icons';
+import { logoutUser } from 'store/session';
 
 import styles from './styles.styl';
 
 const Profile = () => {
+  const handleLogout = () => logoutUser();
+
   const menu = (
     <Menu className={styles.profileMenu}>
       <Menu.Item key="0" icon={<UserOutlined />}>
@@ -18,7 +21,7 @@ const Profile = () => {
         Настройки
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="3" icon={<LogoutOutlined />}>
+      <Menu.Item key="3" onClick={handleLogout} icon={<LogoutOutlined />}>
         Выйти
       </Menu.Item>
     </Menu>
