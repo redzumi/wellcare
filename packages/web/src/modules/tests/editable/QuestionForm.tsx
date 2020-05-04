@@ -36,7 +36,7 @@ const QuestionForm = (props: Props) => {
           }
         ]}
       >
-        <InputNumber defaultValue={3} />
+        <InputNumber />
       </Form.Item>
       <Form.Item>
         <Button htmlType="submit" icon={<PlusOutlined />}>

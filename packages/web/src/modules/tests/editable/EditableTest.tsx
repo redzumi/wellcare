@@ -6,23 +6,25 @@ import QuestionsTable from './QuestionsTable';
 
 type Props = {
   test: Test;
-  onChange: () => void;
+  onSave: (value: Test) => void;
+  onDelete?: (value: Test) => void;
 };
 
 const EditableTest = (props: Props) => {
-  const { test } = props;
+  const { test, onSave, onDelete } = props;
   const [value, setValue] = useState<Test>(test);
   const { id, name, description, questions } = value;
-
-  const handleQuestionsChange = (data: Question[]) => {
-    setValue({ ...value, questions: data });
-  };
 
   const handleDataChange = (data: { name: string; description: string }) => {
     setValue({ ...value, ...data });
   };
 
-  console.log(value);
+  const handleQuestionsChange = (data: Question[]) => {
+    setValue({ ...value, questions: data });
+  };
+
+  const handleFinish = () => onSave(value);
+  const handleDelete = () => onDelete && onDelete(value);
 
   return (
     <React.Fragment>
@@ -31,6 +33,8 @@ const EditableTest = (props: Props) => {
         name={name}
         description={description}
         onChange={handleDataChange}
+        onSave={handleFinish}
+        onDelete={handleDelete}
       />
       <Divider dashed />
       <QuestionsTable questions={questions} onChange={handleQuestionsChange} />

@@ -10,15 +10,30 @@ type Props = {
   name: string;
   description: string;
   onChange: (values: Store) => void;
+  onSave: () => void;
+  onDelete: () => void;
 };
 
 const { TextArea } = Input;
 
 const DataForm = (props: Props) => {
-  const { id, name, description, onChange } = props;
+  const { id, name, description, onChange, onSave, onDelete } = props;
+
+  const handleDelete = (event: React.MouseEvent) => {
+    event.preventDefault();
+    onDelete();
+  };
 
   return (
-    <Form name="survey" onFinish={onChange}>
+    <Form
+      name="survey"
+      initialValues={{
+        name,
+        description
+      }}
+      onValuesChange={onChange}
+      onFinish={onSave}
+    >
       <Space direction="vertical" className={styles.form}>
         <Form.Item
           label="Название теста"
@@ -30,7 +45,7 @@ const DataForm = (props: Props) => {
             }
           ]}
         >
-          <Input value={name} />
+          <Input />
         </Form.Item>
         <Form.Item
           label="Описание теста"
@@ -42,7 +57,7 @@ const DataForm = (props: Props) => {
             }
           ]}
         >
-          <TextArea rows={4} value={description} />
+          <TextArea rows={4} />
         </Form.Item>
         <Form.Item>
           <Space>
@@ -54,7 +69,12 @@ const DataForm = (props: Props) => {
               <Button htmlType="submit">Сохранить</Button>
             )}
             {id !== 'new' && (
-              <Button type="ghost" danger htmlType="submit">
+              <Button
+                type="ghost"
+                danger
+                htmlType="button"
+                onClick={handleDelete}
+              >
                 Удалить
               </Button>
             )}

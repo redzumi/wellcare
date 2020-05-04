@@ -25,4 +25,12 @@ UserSchema.methods.verifyPassword = async function (password: string) {
   return compare;
 };
 
+UserSchema.virtual('id').get(function () {
+  return this._id.toHexString();
+});
+
+UserSchema.set('toJSON', {
+  virtuals: true
+});
+
 export const UserModel = mongoose.model('user', UserSchema);
