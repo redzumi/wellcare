@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Form, Input, Table, Button, Space } from 'antd';
 import { useStore } from 'effector-react';
-
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { Store } from 'antd/lib/form/interface';
 
-import Paper from 'common/page/paper/Paper';
 import { $ui } from 'store/ui';
+import { createTest } from 'store/tests';
+
+import Paper from 'common/page/paper/Paper';
 
 import styles from './styles.styl';
 
@@ -62,6 +63,8 @@ const CreateTest = () => {
         testName: surveyName
       }
     ]);
+
+    // createTest({});
   };
 
   return (

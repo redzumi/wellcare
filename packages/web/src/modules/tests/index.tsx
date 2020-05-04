@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Row, Col, Space, Empty, Button, Spin } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { useStore } from 'effector-react';
 
@@ -7,7 +8,7 @@ import { $ui } from 'store/ui';
 import { $tests, fetchTests } from 'store/tests';
 import Paper from 'common/page/paper/Paper';
 
-import TestCard from './card/TestCard';
+import Card from './card/Card';
 
 import styles from './styles.styl';
 
@@ -28,7 +29,11 @@ const Tests = () => {
         <React.Fragment>
           <Row>
             <Col>
-              <Button type="primary" onClick={handleCreateClick}>
+              <Button
+                type="primary"
+                onClick={handleCreateClick}
+                icon={<PlusOutlined />}
+              >
                 Создать тест
               </Button>
             </Col>
@@ -43,7 +48,7 @@ const Tests = () => {
                   size="middle"
                 >
                   {tests.data.map((test) => (
-                    <TestCard
+                    <Card
                       key={test.id}
                       title={test.name}
                       description={test.description}

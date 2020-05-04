@@ -6,7 +6,7 @@ type Props = {
   description: string;
 };
 
-const TestsItem = (props: Props) => {
+const TestCard = (props: Props) => {
   const { title, description } = props;
 
   return (
@@ -19,4 +19,4 @@ const TestsItem = (props: Props) => {
   );
 };
 
-export default TestsItem;
+export default TestCard;
