@@ -9,7 +9,7 @@ type Props = {
   key: string;
 };
 
-const Item = (props: Props) => {
+const TestsItem = (props: Props) => {
   const { title, description, key } = props;
 
   return (
@@ -24,4 +24,4 @@ const Item = (props: Props) => {
   );
 };
 
-export default Item;
+export default TestsItem;

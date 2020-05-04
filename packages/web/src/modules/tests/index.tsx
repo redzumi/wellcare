@@ -3,7 +3,7 @@ import { Row, Col, Button } from 'antd';
 import { useHistory } from 'react-router-dom';
 
 import Paper from 'common/page/paper/Paper';
-import Item from './item/Item';
+import TestsItem from './TestsItem/TestsItem';
 import { TESTS } from './data';
 
 const Tests = () => {
@@ -22,7 +22,7 @@ const Tests = () => {
       <Row>
         <Col>
           {TESTS.map((test) => (
-            <Item
+            <TestsItem
               title={test.title}
               description={test.description}
               key={test.title}
