@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Input, Table, Button, Space } from 'antd';
+import { useStore } from 'effector-react';
 
-import {
-  DeleteOutlined,
-  EditOutlined,
-  ZoomInOutlined
-} from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { Store } from 'antd/lib/form/interface';
 
 import Paper from 'common/page/paper/Paper';
-import { Store } from 'antd/lib/form/interface';
+import { $ui } from 'store/ui';
 
 import styles from './styles.styl';
 
@@ -17,7 +15,7 @@ const columns = [
     title: 'Название теста',
     dataIndex: 'testName',
     key: 'testName',
-    render: (text: string) => <a>{text}</a>
+    render: (text: string) => <span>{text}</span>
   },
   {
     title: 'Операции',
@@ -25,15 +23,8 @@ const columns = [
     render: () => (
       <div className={styles.actions}>
         <Space>
-          <a href="">
-            <ZoomInOutlined />
-          </a>
-          <a href="">
-            <EditOutlined />
-          </a>
-          <a href="">
-            <DeleteOutlined />
-          </a>
+          <Button icon={<EditOutlined />} />
+          <Button icon={<DeleteOutlined />} />
         </Space>
       </div>
     )
@@ -56,6 +47,7 @@ const data = [
 ];
 
 const CreateTest = () => {
+  const ui = useStore($ui);
   const [count, setCount] = useState(data.length);
   const [tableData, setTableData] = useState(data);
 
@@ -79,7 +71,9 @@ const CreateTest = () => {
         onFinish={handleAddingSurvey}
         className={styles.surveyForm}
       >
-        <Space>
+        <Space
+          direction={ui.media === UIMedia.Mobile ? 'vertical' : 'horizontal'}
+        >
           <Form.Item
             label="Введите название статьи"
             name="surveyName"
@@ -93,8 +87,8 @@ const CreateTest = () => {
             <Input />
           </Form.Item>
           <Form.Item>
-            <Button type="primary" htmlType="submit">
-              +
+            <Button type="primary" htmlType="submit" icon={<PlusOutlined />}>
+              {ui.media === UIMedia.Mobile && 'Добавить'}
             </Button>
           </Form.Item>
         </Space>
