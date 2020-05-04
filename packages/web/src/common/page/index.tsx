@@ -1,7 +1,5 @@
 import React from 'react';
-import { Layout, Result } from 'antd';
-import { useRouteMatch } from 'react-router-dom';
-import { ROUTES } from 'router';
+import { Layout } from 'antd';
 
 import Header from './header/Header';
 import Footer from './footer/Footer';
@@ -16,9 +14,6 @@ const { Content } = Layout;
 
 const Page = (props: Props) => {
   const { children } = props;
-  const hasMatched = ROUTES.some(
-    (route) => useRouteMatch(route.pathname)?.isExact
-  );
 
   return (
     <Layout>
@@ -27,13 +22,6 @@ const Page = (props: Props) => {
         <Content className={styles.content}>
           <div className={styles.container}>
             <div className={styles.body}>{children}</div>
-            {!hasMatched && (
-              <Result
-                status="404"
-                title="404"
-                subTitle="Кажется, тут ничего нет"
-              />
-            )}
           </div>
         </Content>
         <Footer />

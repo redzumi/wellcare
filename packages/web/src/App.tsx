@@ -2,7 +2,9 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { setUIMedia } from 'store/ui';
 import { ROUTES } from 'router';
+
 import Page from 'common/page';
+import Error from 'common/page/error/Error';
 
 const MOBILE_BREAKPOINT = 920;
 
@@ -32,6 +34,7 @@ const App = () => {
               component={route.module}
             />
           ))}
+          <Route exact component={Error} />
         </Switch>
       </Page>
     </Router>
