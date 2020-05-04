@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Button, Space } from 'antd';
+import { Divider, Table, Button, Space } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 import QuestionForm from './QuestionForm';
@@ -40,6 +40,7 @@ const QuestionsTable = (props: Props) => {
   return (
     <React.Fragment>
       <QuestionForm onFinish={handleCreateQuestion} />
+      <Divider dashed />
       <Table columns={columns} dataSource={questions} />
     </React.Fragment>
   );
