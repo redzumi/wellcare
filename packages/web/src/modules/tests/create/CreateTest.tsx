@@ -1,25 +1,18 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
+import { createTest } from 'store/tests';
 import Paper from 'common/page/paper/Paper';
+
 import EditableTest from '../editable/EditableTest';
 
 const TEST: Test = {
   id: 'new',
-  name: 'Тестовый',
-  description: 'Описание',
+  name: 'Тест на хорошую погоду',
+  description: 'Это шаблон теста',
   questions: [
     {
-      name: 'ВопросВопросВопрос ВопросВопрос ВопросВопрос Вопрос Вопрос 1',
-      weight: 1,
-      answers: []
-    },
-    {
-      name: 'Вопрос 2',
-      weight: 1,
-      answers: []
-    },
-    {
-      name: 'Вопрос 3',
+      name: 'Как вам погода?',
       weight: 1,
       answers: []
     }
@@ -28,8 +21,11 @@ const TEST: Test = {
 };
 
 const CreateTest = () => {
-  const handleSave = (value: Test) => {
-    console.log(value);
+  const history = useHistory();
+
+  const handleSave = async (value: Test) => {
+    await createTest(value);
+    history.push('/tests');
   };
 
   return (

@@ -10,13 +10,19 @@ type Props = {
   name: string;
   description: string;
   onChange: (values: Store) => void;
-  onFinish: () => void;
+  onSave: () => void;
+  onDelete: () => void;
 };
 
 const { TextArea } = Input;
 
 const DataForm = (props: Props) => {
-  const { id, name, description, onChange, onFinish } = props;
+  const { id, name, description, onChange, onSave, onDelete } = props;
+
+  const handleDelete = (event: React.MouseEvent) => {
+    event.preventDefault();
+    onDelete();
+  };
 
   return (
     <Form
@@ -26,7 +32,7 @@ const DataForm = (props: Props) => {
         description
       }}
       onValuesChange={onChange}
-      onFinish={onFinish}
+      onFinish={onSave}
     >
       <Space direction="vertical" className={styles.form}>
         <Form.Item
@@ -63,7 +69,12 @@ const DataForm = (props: Props) => {
               <Button htmlType="submit">Сохранить</Button>
             )}
             {id !== 'new' && (
-              <Button type="ghost" danger htmlType="submit">
+              <Button
+                type="ghost"
+                danger
+                htmlType="button"
+                onClick={handleDelete}
+              >
                 Удалить
               </Button>
             )}
