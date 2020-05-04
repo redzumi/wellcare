@@ -1,8 +1,9 @@
 import React from 'react';
-import { Empty } from 'antd';
+
+import Paper from 'common/page/paper/Paper';
 
 const Recommends = () => {
-  return <Empty />;
+  return <Paper title="Рекомендации" />;
 };
 
 export default Recommends;

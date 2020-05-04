@@ -1,8 +1,9 @@
 import React from 'react';
-import { Empty } from 'antd';
+
+import Paper from 'common/page/paper/Paper';
 
 const Profile = () => {
-  return <Empty />;
+  return <Paper title="Профиль" />;
 };
 
 export default Profile;

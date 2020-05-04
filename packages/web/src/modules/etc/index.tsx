@@ -1,8 +1,9 @@
 import React from 'react';
-import { Empty } from 'antd';
+
+import Paper from 'common/page/paper/Paper';
 
 const Etc = () => {
-  return <Empty />;
+  return <Paper title="Дополнительная информация" />;
 };
 
 export default Etc;

@@ -1,16 +1,12 @@
 import React from 'react';
-import { Empty } from 'antd';
 import { useParams } from 'react-router-dom';
+
+import Paper from 'common/page/paper/Paper';
 
 const Tests = () => {
   const params = useParams();
 
-  return (
-    <React.Fragment>
-      {JSON.stringify(params)}
-      <Empty />
-    </React.Fragment>
-  );
+  return <Paper title="Тесты">{JSON.stringify(params)}</Paper>;
 };
 
 export default Tests;

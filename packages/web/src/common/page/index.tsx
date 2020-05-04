@@ -20,9 +20,7 @@ const Page = (props: Props) => {
       <Layout className={styles.layout}>
         <Header />
         <Content className={styles.content}>
-          <div className={styles.container}>
-            <div className={styles.body}>{children}</div>
-          </div>
+          <div className={styles.container}>{children}</div>
         </Content>
         <Footer />
       </Layout>

@@ -41,7 +41,7 @@ export const PAGES = [
   },
   {
     name: 'Тесты',
-    pathname: '/tests/1',
+    pathname: '/tests',
     icon: EyeOutlined
   },
   {
