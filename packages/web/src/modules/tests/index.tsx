@@ -1,12 +1,37 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Row, Col, Button } from 'antd';
+import { useHistory } from 'react-router-dom';
 
 import Paper from 'common/page/paper/Paper';
+import TestsItem from './TestsItem/TestsItem';
+import { TESTS } from './data';
 
 const Tests = () => {
-  const params = useParams();
+  const history = useHistory();
+  const handleCreateClick = () => history.push('/tests/new');
 
-  return <Paper title="Тесты">{JSON.stringify(params)}</Paper>;
+  return (
+    <Paper title="Тесты">
+      <Row>
+        <Col>
+          <Button type="primary" onClick={handleCreateClick}>
+            Создать тест
+          </Button>
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          {TESTS.map((test) => (
+            <TestsItem
+              title={test.title}
+              description={test.description}
+              key={test.title}
+            />
+          ))}
+        </Col>
+      </Row>
+    </Paper>
+  );
 };
 
 export default Tests;
