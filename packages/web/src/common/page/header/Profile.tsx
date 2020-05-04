@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dropdown, Avatar, Menu } from 'antd';
+import { Popover, Button, Menu } from 'antd';
 import {
   UserOutlined,
   SettingOutlined,
@@ -28,9 +28,9 @@ const Profile = () => {
   );
 
   return (
-    <Dropdown placement="bottomRight" overlay={menu} trigger={['click']}>
-      <Avatar className={styles.avatar} icon={<UserOutlined />} />
-    </Dropdown>
+    <Popover placement="bottomRight" content={menu} trigger="click">
+      <Button icon={<UserOutlined />} />
+    </Popover>
   );
 };
 
