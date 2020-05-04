@@ -5,6 +5,7 @@ import Articles from 'modules/articles';
 import Etc from 'modules/etc';
 import About from 'modules/about';
 import Profile from 'modules/profile';
+import Login from 'modules/login';
 
 import {
   HomeOutlined,
@@ -24,7 +25,8 @@ export const ROUTES = [
   { pathname: '/articles', module: Articles },
   { pathname: '/etc', module: Etc },
   { pathname: '/about', module: About },
-  { pathname: '/profile', module: Profile }
+  { pathname: '/profile', module: Profile },
+  { pathname: '/login', module: Login }
 ];
 
 export const PAGES = [

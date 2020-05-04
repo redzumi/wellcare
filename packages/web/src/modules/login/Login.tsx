@@ -1,8 +1,9 @@
 import React from 'react';
-
 import { Form, Space, Input, Button } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import { Store } from 'antd/lib/form/interface';
+
+import { loginUser } from 'store/session';
 
 type Props = {
   onRegister: () => void;
@@ -11,8 +12,11 @@ type Props = {
 const NormalLoginForm = (props: Props) => {
   const { onRegister } = props;
 
-  const handleFinish = (values: Store) => {
-    console.log('Received values of form: ', values);
+  const handleFinish = async (values: Store) => {
+    loginUser({
+      email: values.email,
+      password: values.password
+    });
   };
 
   const handleRegister = () => onRegister();

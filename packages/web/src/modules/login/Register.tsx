@@ -2,11 +2,15 @@ import React from 'react';
 import { Form, Input, Button } from 'antd';
 import { Store } from 'antd/lib/form/interface';
 
+import { registerUser } from 'store/session';
+
 const RegistrationForm = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values: Store) => {
-    console.log('Received values of form: ', values);
+    const { username, password, email, firstName, lastName } = values;
+
+    registerUser({ username, password, email, firstName, lastName });
   };
 
   return (

@@ -97,9 +97,15 @@ router.post(
   '/signup',
   passport.authenticate('signup', { session: false }),
   async (req, res, next) => {
+    const user = req.user;
+
+    // @ts-ignore
+    const body = { _id: user._id, email: user.email };
+    const token = jwt.sign({ user: body }, SECRET);
+
     res.json({
       message: 'Signup successful',
-      user: req.user
+      token: token
     });
   }
 );
@@ -116,7 +122,6 @@ router.post(
 
     res.json({
       message: 'Login successful',
-      user: req.user,
       token: token
     });
   }
