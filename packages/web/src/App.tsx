@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { setUIMedia } from 'store/ui';
-import { ROTES } from 'routes';
+import { ROUTES } from 'routes';
 
 const MOBILE_BREAKPOINT = 920;
 
@@ -21,7 +21,7 @@ const registerResizeListener = () => {
 const App = () => (
   <Router>
     <Switch>
-      {ROTES.map((route) => (
+      {ROUTES.map((route) => (
         <Route
           key={route.pathname}
           path={route.pathname}
