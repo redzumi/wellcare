@@ -2,11 +2,12 @@ import express from 'express';
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  const body = { ...req.body };
-
-  console.log(body);
-  res.status(200).json({ success: true });
+router.get('/', (req, res, next) => {
+  res.json({
+    message: 'You made it to the secure route',
+    user: req.user,
+    token: req.query.secret_token
+  });
 });
 
 export default router;
