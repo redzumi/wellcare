@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import logger from 'morgan';
-// import mongoose from 'mongoose';
+import mongoose from 'mongoose';
 
 import users from './routes/users';
 import tests from './routes/tests';
@@ -13,12 +13,12 @@ const URL = process.env.DB_URL || 'localhost:27017';
 
 console.log(`DB url: ${URL}`);
 
-// mongoose.connect(`mongodb://${URL}/wellcare`, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   autoIndex: false,
-//   useFindAndModify: false
-// });
+mongoose.connect(`mongodb://${URL}/wellcare`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  autoIndex: false,
+  useFindAndModify: false
+});
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
