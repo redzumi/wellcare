@@ -38,7 +38,7 @@ const PageHeader = () => {
           <Col>
             <Space align="center">
               <Notifications />
-              {ui.media === UIMedia.Desktop && <Profile />}
+              <Profile />
               {ui.media === UIMedia.Mobile && (
                 <Button icon={<MenuOutlined />} onClick={handleMenuClick} />
               )}

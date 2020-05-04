@@ -1,14 +1,17 @@
 import React from 'react';
-import { Dropdown, Avatar, Menu } from 'antd';
+import { Popover, Button, Menu } from 'antd';
 import {
   UserOutlined,
   SettingOutlined,
   LogoutOutlined
 } from '@ant-design/icons';
+import { logoutUser } from 'store/session';
 
 import styles from './styles.styl';
 
 const Profile = () => {
+  const handleLogout = () => logoutUser();
+
   const menu = (
     <Menu className={styles.profileMenu}>
       <Menu.Item key="0" icon={<UserOutlined />}>
@@ -18,16 +21,16 @@ const Profile = () => {
         Настройки
       </Menu.Item>
       <Menu.Divider />
-      <Menu.Item key="3" icon={<LogoutOutlined />}>
+      <Menu.Item key="3" onClick={handleLogout} icon={<LogoutOutlined />}>
         Выйти
       </Menu.Item>
     </Menu>
   );
 
   return (
-    <Dropdown placement="bottomRight" overlay={menu} trigger={['click']}>
-      <Avatar className={styles.avatar} icon={<UserOutlined />} />
-    </Dropdown>
+    <Popover placement="bottomRight" content={menu} trigger="click">
+      <Button icon={<UserOutlined />} />
+    </Popover>
   );
 };
 

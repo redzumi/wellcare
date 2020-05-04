@@ -70,4 +70,13 @@ checkSession.fail.watch(({ error }) => {
   console.log(error.message);
 });
 
-export { $session, loginUser, registerUser, checkSession };
+const logoutUser = createEffect({
+  handler: async () => {
+    axios.defaults.headers.common.Authorization = ``;
+    localStorage.removeItem('token');
+  }
+});
+
+$session.on(logoutUser.done, () => ({}));
+
+export { $session, loginUser, registerUser, logoutUser, checkSession };
