@@ -8,6 +8,7 @@ import {
 } from '@ant-design/icons';
 
 import Paper from 'common/page/paper/Paper';
+import { Store } from 'antd/lib/form/interface';
 
 const columns = [
   {
@@ -54,24 +55,22 @@ const CreateTest = () => {
   const [count, setCount] = useState(data.length);
   const [tableData, setTableData] = useState(data);
 
-  const handleAddingSurvey = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAddingSurvey = (values: Store) => {
+    const { surveyName } = values;
+
     setCount(count + 1);
-    const newRow = {
-      key: count.toString(),
-      testName: e.target.value
-    };
-
-    setTableData([...tableData, newRow]);
-  };
-
-  const handleChange = () => {
-    console.log('boba');
+    setTableData([
+      ...tableData,
+      {
+        key: surveyName,
+        testName: surveyName
+      }
+    ]);
   };
 
   return (
     <Paper>
-      Admin Panel
-      <Form name="survey">
+      <Form name="survey" onFinish={handleAddingSurvey}>
         <Form.Item
           label="Введите название статьи"
           name="surveyName"
@@ -82,7 +81,7 @@ const CreateTest = () => {
             }
           ]}
         >
-          <Input onChange={handleChange} onSubmit={handleAddingSurvey} />
+          <Input />
         </Form.Item>
         <Form.Item>
           <Button type="primary" htmlType="submit">
@@ -90,7 +89,7 @@ const CreateTest = () => {
           </Button>
         </Form.Item>
       </Form>
-      <Table columns={columns} dataSource={data} />
+      <Table columns={columns} dataSource={tableData} />
     </Paper>
   );
 };
