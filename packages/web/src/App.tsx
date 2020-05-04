@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { setUIMedia } from 'store/ui';
-import { ROUTES } from 'routes';
+import { ROUTES } from 'router';
 import Page from 'common/page';
 
 const MOBILE_BREAKPOINT = 920;
@@ -22,8 +22,8 @@ const registerResizeListener = () => {
 const App = () => {
   return (
     <Router>
-      <Switch>
-        <Page>
+      <Page>
+        <Switch>
           {ROUTES.map((route) => (
             <Route
               exact
@@ -32,8 +32,8 @@ const App = () => {
               component={route.module}
             />
           ))}
-        </Page>
-      </Switch>
+        </Switch>
+      </Page>
     </Router>
   );
 };

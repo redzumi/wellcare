@@ -16,7 +16,7 @@
       "common/*": ["common/*"],
       "modules/*": ["modules/*"],
       "store/*": ["store/*"],
-      "routes/*": ["routes"]
+      "router/*": ["router"]
     }
   },
   "include": ["./src/**/*"],

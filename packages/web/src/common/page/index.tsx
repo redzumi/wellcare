@@ -1,7 +1,7 @@
 import React from 'react';
-import { Layout, PageHeader, Result } from 'antd';
-import { useLocation } from 'react-router-dom';
-import { ROUTES } from 'routes';
+import { Layout, Result } from 'antd';
+import { useRouteMatch } from 'react-router-dom';
+import { ROUTES } from 'router';
 
 import Header from './header/Header';
 import Footer from './footer/Footer';
@@ -16,8 +16,9 @@ const { Content } = Layout;
 
 const Page = (props: Props) => {
   const { children } = props;
-  const { pathname } = useLocation();
-  const current = ROUTES.find((route) => route.pathname.startsWith(pathname));
+  const hasMatched = ROUTES.some(
+    (route) => useRouteMatch(route.pathname)?.isExact
+  );
 
   return (
     <Layout>
@@ -25,10 +26,8 @@ const Page = (props: Props) => {
         <Header />
         <Content className={styles.content}>
           <div className={styles.container}>
-            <PageHeader title={current?.name} backIcon={false} />
-            {current ? (
-              <div className={styles.body}>{children}</div>
-            ) : (
+            <div className={styles.body}>{children}</div>
+            {!hasMatched && (
               <Result
                 status="404"
                 title="404"

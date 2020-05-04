@@ -1,22 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import { Menu } from 'antd';
 import { useHistory } from 'react-router-dom';
-import { ROUTES } from 'routes';
+import { PAGES } from 'router';
 
 import styles from './styles.styl';
 
 type Props = {
-  withProfile?: boolean;
+  exclude?: string[];
   horizontal?: boolean;
 };
 
 const PageMenu = (props: Props) => {
-  const { horizontal } = props;
+  const { horizontal, exclude } = props;
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const history = useHistory();
   const { location } = history;
 
   useEffect(() => setSelectedKeys([location.pathname]), [location]);
+
+  const pagesWithoutExcluded = PAGES.filter(
+    (page) => !exclude?.includes(page.pathname)
+  );
 
   const handleMenuClick = (pathname: string) => () => history.push(pathname);
 
@@ -26,15 +30,31 @@ const PageMenu = (props: Props) => {
       mode={horizontal ? 'horizontal' : 'vertical'}
       selectedKeys={selectedKeys}
     >
-      {ROUTES.map((route) => (
-        <Menu.Item
-          key={route.pathname}
-          icon={<route.icon />}
-          onClick={handleMenuClick(route.pathname)}
-        >
-          {route.name}
-        </Menu.Item>
-      ))}
+      {pagesWithoutExcluded.reduce((acc, curr) => {
+        const menuItem = curr.deviders ? (
+          [
+            <Menu.Divider key={`${curr.pathname}-devider-top`} />,
+            <Menu.Item
+              key={curr.pathname}
+              icon={<curr.icon />}
+              onClick={handleMenuClick(curr.pathname)}
+            >
+              {curr.name}
+            </Menu.Item>,
+            <Menu.Divider key={`${curr.pathname}-devider-bottom`} />
+          ]
+        ) : (
+          <Menu.Item
+            key={curr.pathname}
+            icon={<curr.icon />}
+            onClick={handleMenuClick(curr.pathname)}
+          >
+            {curr.name}
+          </Menu.Item>
+        );
+
+        return [...acc, menuItem];
+      }, [])}
     </Menu>
   );
 };
