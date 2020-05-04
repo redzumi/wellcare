@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Form, Input, Table, Button } from 'antd';
+import { Form, Input, Table, Button, Space } from 'antd';
 
 import {
   DeleteOutlined,
@@ -9,6 +9,8 @@ import {
 
 import Paper from 'common/page/paper/Paper';
 import { Store } from 'antd/lib/form/interface';
+
+import styles from './styles.styl';
 
 const columns = [
   {
@@ -21,16 +23,18 @@ const columns = [
     title: 'Операции',
     key: 'action',
     render: () => (
-      <div>
-        <a href="">
-          <ZoomInOutlined />
-        </a>
-        <a href="">
-          <EditOutlined />
-        </a>
-        <a href="">
-          <DeleteOutlined />
-        </a>
+      <div className={styles.actions}>
+        <Space>
+          <a href="">
+            <ZoomInOutlined />
+          </a>
+          <a href="">
+            <EditOutlined />
+          </a>
+          <a href="">
+            <DeleteOutlined />
+          </a>
+        </Space>
       </div>
     )
   }
@@ -70,24 +74,30 @@ const CreateTest = () => {
 
   return (
     <Paper>
-      <Form name="survey" onFinish={handleAddingSurvey}>
-        <Form.Item
-          label="Введите название статьи"
-          name="surveyName"
-          rules={[
-            {
-              required: true,
-              message: 'Введите название теста!'
-            }
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item>
-          <Button type="primary" htmlType="submit">
-            +
-          </Button>
-        </Form.Item>
+      <Form
+        name="survey"
+        onFinish={handleAddingSurvey}
+        className={styles.surveyForm}
+      >
+        <Space>
+          <Form.Item
+            label="Введите название статьи"
+            name="surveyName"
+            rules={[
+              {
+                required: true,
+                message: 'Введите название теста!'
+              }
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              +
+            </Button>
+          </Form.Item>
+        </Space>
       </Form>
       <Table columns={columns} dataSource={tableData} />
     </Paper>
