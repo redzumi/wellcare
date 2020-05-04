@@ -26,7 +26,7 @@ const Profile = () => {
 
   return (
     <Dropdown placement="bottomRight" overlay={menu} trigger={['click']}>
-      <Avatar icon={<UserOutlined />} />
+      <Avatar className={styles.avatar} icon={<UserOutlined />} />
     </Dropdown>
   );
 };
