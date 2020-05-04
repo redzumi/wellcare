@@ -1,10 +1,14 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { setUIMedia } from 'store/ui';
+import { useStore } from 'effector-react';
 import { ROUTES } from 'router';
 
 import Page from 'common/page';
 import Error from 'common/page/error/Error';
+import Login from 'modules/login';
+
+import { $session, checkSession } from 'store/session';
 
 const MOBILE_BREAKPOINT = 920;
 
@@ -22,10 +26,13 @@ const registerResizeListener = () => {
 };
 
 const App = () => {
+  const session = useStore($session);
+
   return (
     <Router>
       <Page>
         <Switch>
+          {!session.token && <Route exact component={Login} />}
           {ROUTES.map((route) => (
             <Route
               exact
@@ -42,5 +49,6 @@ const App = () => {
 };
 
 registerResizeListener();
+checkSession();
 
 export default App;

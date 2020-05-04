@@ -1,0 +1,2 @@
+type Test = {};
+type TestStatus = {};

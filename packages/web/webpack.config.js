@@ -63,7 +63,7 @@ const config = {
               lessOptions: {
                 modifyVars: {
                   'primary-color': '#5ABA4A',
-                  'link-color': '#63C8F2',
+                  // 'link-color': '#63C8F2',
                   'border-radius-base': '2px',
                   'layout-header-background': '#ffffff'
                 },
