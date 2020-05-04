@@ -3,7 +3,11 @@ import { TestModel } from '../models/Test';
 
 const router = express.Router();
 
-const mongoCleaner = (req: Request & { user: User }, res: Response, next: () => void) => {
+const mongoCleaner = (
+  req: Request & { user: User },
+  res: Response,
+  next: () => void
+) => {
   delete req.body._id;
   delete req.body._vv;
   next();

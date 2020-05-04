@@ -1,5 +1,5 @@
 type Test = {
-  _id?: string
+  _id?: string;
   id: string;
   name: string;
   description: string;
