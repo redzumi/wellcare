@@ -18,6 +18,7 @@ import {
 export const ROUTES = [
   { name: 'Главная', pathname: '/', module: Home, icon: HomeOutlined },
   { name: 'Тесты', pathname: '/tests', module: Tests, icon: EyeOutlined },
+  { name: 'Тесты', pathname: '/tests/:id', module: Tests, icon: EyeOutlined },
   {
     name: 'Рекомендации',
     pathname: '/recommends',

@@ -1,13 +1,15 @@
 import React from 'react';
 import { Empty } from 'antd';
-
-import Page from 'common/page';
+import { useParams } from 'react-router-dom';
 
 const Tests = () => {
+  const params = useParams();
+
   return (
-    <Page title="Тесты">
+    <React.Fragment>
+      {JSON.stringify(params)}
       <Empty />
-    </Page>
+    </React.Fragment>
   );
 };
 

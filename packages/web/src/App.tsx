@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { setUIMedia } from 'store/ui';
 import { ROUTES } from 'routes';
+import Page from 'common/page';
 
 const MOBILE_BREAKPOINT = 920;
 
@@ -18,19 +19,24 @@ const registerResizeListener = () => {
   });
 };
 
-const App = () => (
-  <Router>
-    <Switch>
-      {ROUTES.map((route) => (
-        <Route
-          key={route.pathname}
-          path={route.pathname}
-          component={route.module}
-        />
-      ))}
-    </Switch>
-  </Router>
-);
+const App = () => {
+  return (
+    <Router>
+      <Switch>
+        <Page>
+          {ROUTES.map((route) => (
+            <Route
+              exact
+              key={route.pathname}
+              path={route.pathname}
+              component={route.module}
+            />
+          ))}
+        </Page>
+      </Switch>
+    </Router>
+  );
+};
 
 registerResizeListener();
 
