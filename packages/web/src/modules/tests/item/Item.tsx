@@ -1,5 +1,7 @@
 import React from 'react';
-import { Descriptions, Empty } from 'antd';
+import { Descriptions, Empty, Card } from 'antd';
+
+import styles from './styles.styl';
 
 type Props = {
   title: string;
@@ -11,13 +13,14 @@ const Item = (props: Props) => {
   const { title, description, key } = props;
 
   return (
-    <div key={key}>
-      <Empty>
-        <Descriptions title={title} layout="vertical">
+    <Card title={title} bordered={false}>
+      <div key={key}>
+        <Empty className={styles.empty} />
+        <Descriptions layout="vertical">
           <Descriptions.Item>{description}</Descriptions.Item>
         </Descriptions>
-      </Empty>
-    </div>
+      </div>
+    </Card>
   );
 };
 
