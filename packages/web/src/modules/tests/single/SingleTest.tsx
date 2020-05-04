@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useStore } from 'effector-react';
-import { Empty } from 'antd';
+import { Empty, Spin } from 'antd';
 
-import { $tests, saveTest, deleteTest } from 'store/tests';
+import { $tests, fetchTests, saveTest, deleteTest } from 'store/tests';
 
 import Paper from 'common/page/paper/Paper';
 import EditableTest from '../editable/EditableTest';
@@ -11,8 +11,14 @@ import EditableTest from '../editable/EditableTest';
 const CreateTest = () => {
   const { id } = useParams();
   const history = useHistory();
-  const { data: tests } = useStore($tests);
+  const { ready, data: tests } = useStore($tests);
   const currentTest = tests.find((test) => test.id === id);
+
+  useEffect(() => {
+    if (!ready) {
+      fetchTests();
+    }
+  }, [ready]);
 
   const handleSave = async (value: Test) => {
     saveTest(value);
@@ -22,6 +28,10 @@ const CreateTest = () => {
     await deleteTest(value);
     history.push('/tests');
   };
+
+  if (!ready) {
+    return <Spin spinning />;
+  }
 
   if (!currentTest) {
     return <Empty />;
