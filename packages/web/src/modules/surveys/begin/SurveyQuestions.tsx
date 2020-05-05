@@ -22,23 +22,15 @@ const SurveyQuestions = () => {
   return (
     <Paper>
       <Space align="center" direction="vertical" size="middle">
-        <Card title={currentSurvey?.questions[0].name}>
-          {currentSurvey?.questions[0].answers.map((value) => {
-            <Checkbox>{value.name}</Checkbox>;
-          })}
-          <Button>Дальше</Button>
+        <Card title={currentSurvey?.questions[currQuestion].name}>
+          {currentSurvey?.questions[currQuestion].answers.map((value) => (
+            <Checkbox>{value.name}</Checkbox>
+          ))}
+          <Button type="primary" onClick={handleMoveToNextQuestion}>
+            Дальше
+          </Button>
         </Card>
-        {currQuestion}/{questionCount}
-        <Space direction="horizontal">
-          <Button
-            icon={<ArrowRightOutlined />}
-            onClick={handleMoveToNextQuestion}
-          />
-          <Button
-            icon={<ArrowLeftOutlined />}
-            onClick={handleMoveToPrevQuestion}
-          />
-        </Space>
+        {currQuestion}/{currentSurvey?.questions.length}
       </Space>
     </Paper>
   );

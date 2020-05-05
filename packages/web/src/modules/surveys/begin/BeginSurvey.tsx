@@ -44,15 +44,7 @@ const BeginSurvey = () => {
       </Paper>
     );
   }
-  return (
-    <SurveyQuestions
-      imgQuestionSrc={QUEST.imgQuestionSrc}
-      questionCount={QUEST.questionCount}
-      questionTitle={QUEST.questionTitle}
-      questionDescription={QUEST.questionDescription}
-      answersOptions={QUEST.answersOptions}
-    />
-  );
+  return <SurveyQuestions />;
 };
 
 export default BeginSurvey;
