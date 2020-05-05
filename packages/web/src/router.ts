@@ -1,7 +1,9 @@
 import Home from 'modules/home';
-import Tests from 'modules/tests';
-import CreateTest from 'modules/tests/create/CreateTest';
-import SingleTest from 'modules/tests/single/SingleTest';
+
+import Surveys from 'modules/surveys';
+import CreateSurvey from 'modules/surveys/create/CreateSurvey';
+import SingleSurvey from 'modules/surveys/single/SingleSurvey';
+
 import Recommends from 'modules/recommends';
 import Articles from 'modules/articles';
 import Etc from 'modules/etc';
@@ -21,9 +23,11 @@ import {
 
 export const ROUTES = [
   { pathname: '/', module: Home },
-  { pathname: '/tests', module: Tests },
-  { pathname: '/tests/new', module: CreateTest },
-  { pathname: '/tests/:id', module: SingleTest },
+
+  { pathname: '/surveys', module: Surveys },
+  { pathname: '/surveys/new', module: CreateSurvey },
+  { pathname: '/surveys/:id', module: SingleSurvey },
+
   { pathname: '/recommends', module: Recommends },
   { pathname: '/articles', module: Articles },
   { pathname: '/etc', module: Etc },
@@ -45,8 +49,8 @@ export const PAGES = [
     deviders: true
   },
   {
-    name: 'Тесты',
-    pathname: '/tests',
+    name: 'Опросы',
+    pathname: '/surveys',
     icon: EyeOutlined
   },
   {

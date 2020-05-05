@@ -5,28 +5,28 @@ import { useHistory } from 'react-router-dom';
 import { useStore } from 'effector-react';
 
 import { $ui } from 'store/ui';
-import { $tests, fetchTests } from 'store/tests';
+import { $surveys, fetchSurveys } from 'store/surveys';
 import Paper from 'common/page/paper/Paper';
 
 import Card from './card/Card';
 
 import styles from './styles.styl';
 
-const Tests = () => {
+const Surveys = () => {
   const history = useHistory();
   const ui = useStore($ui);
-  const tests = useStore($tests);
+  const surveys = useStore($surveys);
 
-  const handleCreateClick = () => history.push('/tests/new');
-  const handleTestClick = (id: string) => () => history.push(`/tests/${id}`);
+  const handleCreateClick = () => history.push('/surveys/new');
+  const handleSurveyClick = (id: string) => () => history.push(`/surveys/${id}`);
 
   useEffect(() => {
-    fetchTests();
+    fetchSurveys();
   }, []);
 
   return (
-    <Paper title="Тесты">
-      {tests.ready ? (
+    <Paper title="Опросы">
+      {surveys.ready ? (
         <React.Fragment>
           <Row>
             <Col>
@@ -35,12 +35,12 @@ const Tests = () => {
                 onClick={handleCreateClick}
                 icon={<PlusOutlined />}
               >
-                Создать тест
+                Создать опрос
               </Button>
             </Col>
           </Row>
           <Row>
-            {tests.data.length ? (
+            {surveys.data.length ? (
               <Col>
                 <Space
                   direction={
@@ -48,12 +48,12 @@ const Tests = () => {
                   }
                   size="middle"
                 >
-                  {tests.data.map((test) => (
+                  {surveys.data.map((survey) => (
                     <Card
-                      key={test.id}
-                      title={test.name}
-                      description={test.description}
-                      onClick={handleTestClick(test.id)}
+                      key={survey.id}
+                      title={survey.name}
+                      description={survey.description}
+                      onClick={handleSurveyClick(survey.id)}
                     />
                   ))}
                 </Space>
@@ -72,4 +72,4 @@ const Tests = () => {
   );
 };
 
-export default Tests;
+export default Surveys;

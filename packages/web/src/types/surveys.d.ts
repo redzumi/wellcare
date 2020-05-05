@@ -1,4 +1,4 @@
-type Test = {
+type Survey = {
   id: string;
   name: string;
   description: string;
@@ -17,7 +17,7 @@ type Answer = {
   weight: number;
 };
 
-type TestsState = {
-  data: Test[];
+type SurveysState = {
+  data: Survey[];
   ready: boolean;
 };

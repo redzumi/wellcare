@@ -7,7 +7,7 @@ type Props = {
   onClick: () => void;
 };
 
-const TestCard = (props: Props) => {
+const SurveyCard = (props: Props) => {
   const { title, description, onClick } = props;
 
   return (
@@ -20,4 +20,4 @@ const TestCard = (props: Props) => {
   );
 };
 
-export default TestCard;
+export default SurveyCard;

@@ -5,14 +5,14 @@ import DataForm from './DataForm';
 import QuestionsTable from './QuestionsTable';
 
 type Props = {
-  test: Test;
-  onSave: (value: Test) => void;
-  onDelete?: (value: Test) => void;
+  survey: Survey;
+  onSave: (value: Survey) => void;
+  onDelete?: (value: Survey) => void;
 };
 
-const EditableTest = (props: Props) => {
-  const { test, onSave, onDelete } = props;
-  const [value, setValue] = useState<Test>(test);
+const EditableSurvey = (props: Props) => {
+  const { survey, onSave, onDelete } = props;
+  const [value, setValue] = useState<Survey>(survey);
   const { id, name, description, questions } = value;
 
   const handleDataChange = (data: { name: string; description: string }) => {
@@ -42,4 +42,4 @@ const EditableTest = (props: Props) => {
   );
 };
 
-export default EditableTest;
+export default EditableSurvey;

@@ -36,24 +36,24 @@ const DataForm = (props: Props) => {
     >
       <Space direction="vertical" className={styles.form}>
         <Form.Item
-          label="Название теста"
+          label="Название опроса"
           name="name"
           rules={[
             {
               required: true,
-              message: 'Пожалуйста, введите название теста'
+              message: 'Пожалуйста, введите название опроса'
             }
           ]}
         >
           <Input />
         </Form.Item>
         <Form.Item
-          label="Описание теста"
+          label="Описание опроса"
           name="description"
           rules={[
             {
               required: true,
-              message: 'Пожалуйста, введите описание теста'
+              message: 'Пожалуйста, введите описание опроса'
             }
           ]}
         >
