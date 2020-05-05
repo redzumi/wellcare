@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Card, Space, Radio, Steps, Button, Spin, Form } from 'antd';
+import {
+  Row,
+  Col,
+  Card,
+  Space,
+  Radio,
+  Steps,
+  Popover,
+  Button,
+  Spin,
+  Form
+} from 'antd';
 import { useStore } from 'effector-react';
 import { useParams, Redirect } from 'react-router-dom';
 import { Store } from 'antd/lib/form/interface';
@@ -64,6 +75,32 @@ const SurveyQuestions = () => {
         </Steps>
         <Row justify="center">
           <Col span={media === UIMedia.Mobile ? 24 : 12}>
+            <Row justify="end">
+              <Popover
+                content={
+                  <div style={{ maxWidth: '300px' }}>
+                    Люди «серебряного возраста» старше 60 лет в группе особого
+                    риска. Именно у пожилых людей из-за нагрузки на иммунную
+                    систему возможны осложнения, в том числе такие опасные, как
+                    вирусная пневмония. Эти осложнения могут привести к самым
+                    печальным исходам.
+                  </div>
+                }
+                trigger="click"
+              >
+                <Button type="link" style={{ paddingRight: 0 }}>
+                  Хотите узнать подробнее?
+                  <span> </span>
+                  <span
+                    style={{ paddingLeft: 8 }}
+                    role="img"
+                    aria-label="smile"
+                  >
+                    😉
+                  </span>
+                </Button>
+              </Popover>
+            </Row>
             <Card title={currQuestion.name}>
               <Space direction="vertical" size="middle">
                 <Form
