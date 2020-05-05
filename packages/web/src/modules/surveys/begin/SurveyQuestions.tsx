@@ -40,7 +40,6 @@ const SurveyQuestions = () => {
   const { questions } = currentSurvey;
 
   const currQuestion = questions[currentIndex];
-  const prevQuestion = questions[currentIndex - 1];
 
   if (!currQuestion) {
     return <Redirect to={`/surveys/finish/${id}`} />;
@@ -59,9 +58,9 @@ const SurveyQuestions = () => {
     <Paper>
       <Space direction="vertical" size="large" className={styles.questions}>
         <Steps current={currentIndex} size="small">
-          {prevQuestion && <Step />}
-          <Step />
-          <Step description="Результаты" />
+          {questions.map((question) => (
+            <Step key={question.name} />
+          ))}
         </Steps>
         <Row justify="center">
           <Col span={media === UIMedia.Mobile ? 24 : 12}>
