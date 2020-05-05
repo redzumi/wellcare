@@ -53,7 +53,7 @@ router.put('/:id', async (req: Request & { user: User }, res) => {
   const { id } = params;
 
   try {
-    await SurveyModel.findOneAndUpdate({ userId: user._id, _id: id }, body);
+    await SurveyModel.findOneAndUpdate({ _id: id }, body);
     res.status(200).json({ success: true });
   } catch (ex) {
     res.status(500).json({ success: false, error: ex.message });
@@ -65,7 +65,7 @@ router.delete('/:id', async (req: Request & { user: User }, res, next) => {
   const { id } = params;
 
   try {
-    await SurveyModel.findOneAndDelete({ userId: user._id, _id: id });
+    await SurveyModel.findOneAndDelete({ _id: id });
     res.status(200).json({ success: true });
   } catch (ex) {
     res.status(500).json({ success: false, error: ex.message });
