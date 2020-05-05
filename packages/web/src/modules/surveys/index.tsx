@@ -18,7 +18,8 @@ const Surveys = () => {
   const surveys = useStore($surveys);
 
   const handleCreateClick = () => history.push('/surveys/new');
-  const handleSurveyClick = (id: string) => () => history.push(`/surveys/${id}`);
+  const handleSurveyClick = (id: string) => () =>
+    history.push(`/surveys/${id}`);
 
   useEffect(() => {
     fetchSurveys();
