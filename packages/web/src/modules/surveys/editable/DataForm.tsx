@@ -66,7 +66,9 @@ const DataForm = (props: Props) => {
                 Создать
               </Button>
             ) : (
-              <Button htmlType="submit">Сохранить</Button>
+              <Button type="primary" htmlType="submit">
+                Сохранить
+              </Button>
             )}
             {id !== 'new' && (
               <Button

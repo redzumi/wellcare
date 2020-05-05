@@ -41,7 +41,7 @@ const QuestionForm = (props: Props) => {
       </Form.Item>
       <Form.Item
         label="Признак"
-        name="weight"
+        name="feature"
         rules={[
           {
             required: true,
