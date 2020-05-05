@@ -62,12 +62,14 @@ const SurveyQuestions = () => {
         <Row justify="center">
           <Col span={media === UIMedia.Mobile ? 24 : 12}>
             <Card title={currQuestion.name}>
-              {currQuestion.answers.map((answer: Answer) => (
-                <Checkbox key={answer.feature}>{answer.name}</Checkbox>
-              ))}
-              <Button type="primary" onClick={handleMoveToNextQuestion}>
-                Дальше
-              </Button>
+              <Space direction="vertical" size="middle">
+                {currQuestion.answers.map((answer: Answer) => (
+                  <Checkbox key={answer.feature}>{answer.name}</Checkbox>
+                ))}
+                <Button type="primary" onClick={handleMoveToNextQuestion}>
+                  Дальше
+                </Button>
+              </Space>
             </Card>
           </Col>
         </Row>

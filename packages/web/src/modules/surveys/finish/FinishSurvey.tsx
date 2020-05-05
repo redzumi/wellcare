@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Result } from 'antd';
+import { Result, Button } from 'antd';
 import { useParams } from 'react-router-dom';
 import { useStore } from 'effector-react';
 
@@ -23,6 +23,11 @@ const FinishSurvey = () => {
       <Result
         status="success"
         title={`Вы успешно прошли: ${currentSurvey?.name}!`}
+        extra={[
+          <Button type="primary" key="results">
+            Узнать результаты
+          </Button>
+        ]}
       />
     </Paper>
   );

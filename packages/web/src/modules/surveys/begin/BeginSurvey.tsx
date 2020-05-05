@@ -37,10 +37,12 @@ const BeginSurvey = () => {
         <Card
           title={currentSurvey?.name}
           bordered={false}
-          className={styles.cardTitle}
+          className={styles.card}
         >
           <Descriptions layout="vertical">
-            <Descriptions.Item>{currentSurvey?.description}</Descriptions.Item>
+            <Descriptions.Item>
+              <p className={styles.description}>{currentSurvey?.description}</p>
+            </Descriptions.Item>
           </Descriptions>
         </Card>
         <Button type="primary" onClick={handleStart}>
