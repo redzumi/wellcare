@@ -29,7 +29,7 @@ router.get('/:id', async (req: Request & { user: User }, res, next) => {
   const { id } = params;
 
   try {
-    const survey = await SurveyModel.find({ _id: id });
+    const survey = await SurveyModel.findOne({ _id: id });
     res.json(survey);
   } catch (ex) {
     res.status(500).json({ success: false, error: ex.message });

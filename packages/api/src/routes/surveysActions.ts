@@ -21,12 +21,16 @@ router.post('/:surveyId', async (req: Request & { user: User }, res, next) => {
   const { user, params } = req;
 
   try {
-    const surveyAction = new SurveyActionModel({
+    const body = {
       userId: user._id,
       surveyId: params.surveyId
-    });
+    };
 
+    await SurveyActionModel.findOneAndDelete({ ...body });
+
+    const surveyAction = new SurveyActionModel(body);
     await surveyAction.save();
+
     res.status(200).json(surveyAction);
   } catch (ex) {
     res.status(500).json({ success: false, error: ex.message });
@@ -51,6 +55,10 @@ router.patch('/:surveyId', async (req: Request & { user: User }, res, next) => {
     const surveyAnswer = surveyQuestion.answers.find(
       (a: Answer) => a.feature === answer
     );
+
+    if (!surveyQuestion || !surveyAnswer) {
+      return res.status(400).json({ success: false });
+    }
 
     const surveyQA = [
       ...surveyAction.surveyQA,

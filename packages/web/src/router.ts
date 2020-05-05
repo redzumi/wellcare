@@ -43,13 +43,13 @@ export const PAGES = [
   {
     name: 'Профиль',
     pathname: '/profile',
-    icon: UserOutlined,
-    deviders: true
+    icon: UserOutlined
   },
   {
     name: 'Опросы',
     pathname: '/surveys',
-    icon: EyeOutlined
+    icon: EyeOutlined,
+    deviders: true
   },
   {
     name: 'Рекомендации',
