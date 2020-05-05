@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Descriptions, Button, Space } from 'antd';
+import { Card, Spin, Descriptions, Button, Space } from 'antd';
 import { useParams } from 'react-router-dom';
 import { useStore } from 'effector-react';
 
 import { $surveys, fetchSurveys } from 'store/surveys';
+import { beginSurveyQA } from 'store/surveysActions';
 
 import Paper from 'common/page/paper/Paper';
 import SurveyQuestions from './SurveyQuestions';
@@ -23,8 +24,13 @@ const BeginSurvey = () => {
     }
   }, [ready]);
 
-  const handleStart = () => {
+  if (!currentSurvey) {
+    return <Spin spinning />;
+  }
+
+  const handleStart = async () => {
     setIsStarted(true);
+    await beginSurveyQA(currentSurvey);
   };
 
   if (isStarted) {
