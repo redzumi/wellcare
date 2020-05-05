@@ -16,9 +16,11 @@ const SurveyActionSchema = new Schema({
     {
       name: String,
       weight: Number,
+      feature: String,
       answer: {
         name: String,
-        weight: Number
+        weight: Number,
+        feature: String
       }
     }
   ]
