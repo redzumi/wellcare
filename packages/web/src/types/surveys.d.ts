@@ -8,12 +8,14 @@ type Survey = {
 
 type Question = {
   name: string;
+  feature: string;
   weight: number;
   answers: Answer[];
 };
 
 type Answer = {
   name: string;
+  feature: string;
   weight: number;
 };
 

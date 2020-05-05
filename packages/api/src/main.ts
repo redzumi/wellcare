@@ -7,6 +7,7 @@ import mongoose from 'mongoose';
 import { router as auth, passport } from './routes/auth';
 import users from './routes/users';
 import surveys from './routes/surveys';
+import surveysActions from './routes/surveysActions';
 
 const app = express();
 const PORT = 4000;
@@ -38,6 +39,12 @@ app.use(
   '/api/v1/surveys',
   passport.authenticate('jwt', { session: false }),
   surveys
+);
+
+app.use(
+  '/api/v1/surveys/actions',
+  passport.authenticate('jwt', { session: false }),
+  surveysActions
 );
 
 app.listen(PORT, () => console.log(`Works on ${PORT}...`));
