@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 
 import { SurveyActionModel } from '../models/SurveyAction';
 import { SurveyModel } from '../models/Survey';
-import estimateCovid from '../../../core/src/main';
+import { estimateCovid } from '@wellcare/core';
 import { PredictData } from '../../../core/src/data';
 
 const router = express.Router();
