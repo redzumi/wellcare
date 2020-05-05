@@ -5,19 +5,28 @@ import {
   SettingOutlined,
   LogoutOutlined
 } from '@ant-design/icons';
+import { useHistory } from 'react-router-dom';
+
 import { logoutUser } from 'store/session';
 
 import styles from './styles.styl';
 
 const Profile = () => {
+  const history = useHistory();
+
   const handleLogout = () => logoutUser();
+  const handleProfileClick = () => history.push('/profile');
 
   const menu = (
     <Menu className={styles.profileMenu}>
-      <Menu.Item key="0" icon={<UserOutlined />}>
+      <Menu.Item key="0" icon={<UserOutlined />} onClick={handleProfileClick}>
         Профиль
       </Menu.Item>
-      <Menu.Item key="1" icon={<SettingOutlined />}>
+      <Menu.Item
+        key="1"
+        icon={<SettingOutlined />}
+        onClick={handleProfileClick}
+      >
         Настройки
       </Menu.Item>
       <Menu.Divider />
