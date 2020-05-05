@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@wellcare/web",
   "version": "0.1.0",
   "scripts": {
     "lint": "tsc --noEmit && eslint 'src/**/*.{js,ts,tsx}' --ignore-pattern '*.d.ts' --fix",
