@@ -8,10 +8,11 @@ import styles from './styles.styl';
 type Props = {
   exclude?: string[];
   horizontal?: boolean;
+  media: UIMedia;
 };
 
 const PageMenu = (props: Props) => {
-  const { horizontal, exclude } = props;
+  const { horizontal, exclude, media } = props;
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
   const history = useHistory();
   const { location } = history;
@@ -31,27 +32,28 @@ const PageMenu = (props: Props) => {
       selectedKeys={selectedKeys}
     >
       {pagesWithoutExcluded.reduce((acc, curr) => {
-        const menuItem = curr.deviders ? (
-          [
-            <Menu.Divider key={`${curr.pathname}-devider-top`} />,
+        const menuItem =
+          curr.deviders && media === UIMedia.Mobile ? (
+            [
+              <Menu.Divider key={`${curr.pathname}-devider-top`} />,
+              <Menu.Item
+                key={curr.pathname}
+                icon={<curr.icon />}
+                onClick={handleMenuClick(curr.pathname)}
+              >
+                {curr.name}
+              </Menu.Item>,
+              <Menu.Divider key={`${curr.pathname}-devider-bottom`} />
+            ]
+          ) : (
             <Menu.Item
               key={curr.pathname}
               icon={<curr.icon />}
               onClick={handleMenuClick(curr.pathname)}
             >
               {curr.name}
-            </Menu.Item>,
-            <Menu.Divider key={`${curr.pathname}-devider-bottom`} />
-          ]
-        ) : (
-          <Menu.Item
-            key={curr.pathname}
-            icon={<curr.icon />}
-            onClick={handleMenuClick(curr.pathname)}
-          >
-            {curr.name}
-          </Menu.Item>
-        );
+            </Menu.Item>
+          );
 
         return [...acc, menuItem];
       }, [])}

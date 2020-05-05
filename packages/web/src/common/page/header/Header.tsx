@@ -33,7 +33,7 @@ const PageHeader = () => {
               <Space size="middle">
                 <Logo />
                 {ui.media === UIMedia.Desktop && (
-                  <Menu horizontal exclude={['/profile']} />
+                  <Menu horizontal exclude={['/profile']} media={ui.media} />
                 )}
               </Space>
             </Row>
@@ -58,7 +58,7 @@ const PageHeader = () => {
         onClose={handleDrawerClose}
         visible={drawer}
       >
-        <Menu />
+        <Menu media={ui.media} />
       </Drawer>
     </React.Fragment>
   );
