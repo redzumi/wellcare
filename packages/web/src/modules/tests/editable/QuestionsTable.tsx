@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Divider, Table, Button, Space } from 'antd';
 import { ColumnProps } from 'antd/lib/table/Column';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 import QuestionForm from './QuestionForm';
+import AnswersDrawer from './AnswersDrawer';
 
 type Props = {
   questions: Question[];
@@ -11,42 +12,47 @@ type Props = {
 };
 
 const QuestionsTable = (props: Props) => {
+  const [current, setCurrent] = useState<Question | null>(null);
   const { questions, onChange } = props;
-  const questionsWithKeys = questions.map((question) => ({
-    ...question,
-    key: question.name
-  }));
 
   const handleDeleteQuestion = (question: Question) => () => {
     onChange(questions.filter((q) => q.name !== question.name));
   };
 
   const handleEditQuestion = (question: Question) => () => {
-    // TODO answers
-    console.log(question);
+    setCurrent(question);
   };
 
   const handleCreateQuestion = (name: string, weight: number) => {
-    const question: Question = { name, weight, answers: [] };
+    onChange([...questions, { name, weight, answers: [] }]);
+  };
 
-    onChange([...questions, question]);
+  const handleDrawerClose = () => setCurrent(null);
+  const handleQuestionChange = (question: Question) => {
+    onChange(
+      questions.map((q) => ({
+        ...q,
+        ...(q.name === question.name && question)
+      }))
+    );
+    setCurrent(null);
   };
 
   const columns: ColumnProps<Question>[] = [
     {
-      title: 'Название вопроса',
+      title: 'Вопрос',
       dataIndex: 'name',
       key: 'name',
       render: (text: string) => <span>{text}</span>
     },
     {
-      title: 'Вес вопроса',
+      title: 'Вес',
       dataIndex: 'weight',
       key: 'weight',
       render: (text: string) => <span>{text}</span>
     },
     {
-      title: 'Операции',
+      title: '',
       key: 'action',
       render: (text, record) => (
         <Space>
@@ -67,7 +73,15 @@ const QuestionsTable = (props: Props) => {
     <React.Fragment>
       <QuestionForm onFinish={handleCreateQuestion} />
       <Divider dashed />
-      <Table columns={columns} dataSource={questionsWithKeys} />
+      <Table
+        columns={columns}
+        dataSource={questions.map((data) => ({ ...data, key: data.name }))}
+      />
+      <AnswersDrawer
+        question={current}
+        onChange={handleQuestionChange}
+        onClose={handleDrawerClose}
+      />
     </React.Fragment>
   );
 };
