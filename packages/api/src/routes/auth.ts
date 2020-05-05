@@ -100,7 +100,17 @@ router.post(
   async (req: Request & { user: User }, res, next) => {
     const user = req.user;
 
-    const body = { _id: user._id, email: user.email, role: user.role };
+    const body = {
+      _id: user._id,
+      email: user.email,
+      role: user.role,
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName
+    };
+
+    console.log(body);
+
     const token = jwt.sign({ user: body }, SECRET);
 
     res.json({
@@ -116,7 +126,17 @@ router.post(
   async (req: Request & { user: User }, res, next) => {
     const user = req.user;
 
-    const body = { _id: user._id, email: user.email, role: user.role };
+    const body = {
+      _id: user._id,
+      email: user.email,
+      role: user.role,
+      username: user.username,
+      firstName: user.firstName,
+      lastName: user.lastName
+    };
+
+    console.log(body);
+
     const token = jwt.sign({ user: body }, SECRET);
 
     res.json({

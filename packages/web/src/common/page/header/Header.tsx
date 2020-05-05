@@ -33,7 +33,7 @@ const PageHeader = () => {
               <Space size="middle">
                 <Logo />
                 {ui.media === UIMedia.Desktop && (
-                  <Menu horizontal exclude={['/profile']} media={ui.media} />
+                  <Menu horizontal media={ui.media} />
                 )}
               </Space>
             </Row>
