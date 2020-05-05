@@ -15,59 +15,61 @@ const mongoCleaner = (
 
 router.use(mongoCleaner);
 
-router.get('/', (req: Request & { user: User }, res, next) => {
-  const { user } = req;
-
-  SurveyModel.find({ userId: user._id })
-    .then((data: Survey[]) => res.json(data))
-    .catch((ex: Error) =>
-      res.status(500).json({ success: false, error: ex.message })
-    );
+router.get('/', async (req: Request & { user: User }, res, next) => {
+  try {
+    const surveys = await SurveyModel.find();
+    res.json(surveys);
+  } catch (ex) {
+    res.status(500).json({ success: false, error: ex.message });
+  }
 });
 
-router.get('/:id', (req: Request & { user: User }, res, next) => {
-  const { user, params } = req;
+router.get('/:id', async (req: Request & { user: User }, res, next) => {
+  const { params } = req;
   const { id } = params;
 
-  SurveyModel.find({ userId: user._id, _id: id })
-    .then((data: Survey) => res.json(data))
-    .catch((ex: Error) =>
-      res.status(500).json({ success: false, error: ex.message })
-    );
+  try {
+    const survey = await SurveyModel.find({ _id: id });
+    res.json(survey);
+  } catch (ex) {
+    res.status(500).json({ success: false, error: ex.message });
+  }
 });
 
-router.post('/', (req: Request & { user: User }, res, next) => {
+router.post('/', async (req: Request & { user: User }, res, next) => {
   const { user, body } = req;
   const survey = new SurveyModel({ ...body, userId: user._id });
 
-  survey
-    .save()
-    .then(() => res.status(200).json(survey))
-    .catch((ex: Error) =>
-      res.status(500).json({ success: false, error: ex.message })
-    );
+  try {
+    await survey.save();
+    res.status(200).json(survey);
+  } catch (ex) {
+    res.status(500).json({ success: false, error: ex.message });
+  }
 });
 
-router.put('/:id', (req: Request & { user: User }, res) => {
+router.put('/:id', async (req: Request & { user: User }, res) => {
   const { user, body, params } = req;
   const { id } = params;
 
-  SurveyModel.findOneAndUpdate({ userId: user._id, _id: id }, body)
-    .then(() => res.status(200).json({ success: true }))
-    .catch((ex: Error) =>
-      res.status(500).json({ success: false, error: ex.message })
-    );
+  try {
+    await SurveyModel.findOneAndUpdate({ userId: user._id, _id: id }, body);
+    res.status(200).json({ success: true });
+  } catch (ex) {
+    res.status(500).json({ success: false, error: ex.message });
+  }
 });
 
-router.delete('/:id', (req: Request & { user: User }, res, next) => {
+router.delete('/:id', async (req: Request & { user: User }, res, next) => {
   const { user, params } = req;
   const { id } = params;
 
-  SurveyModel.findOneAndDelete({ userId: user._id, _id: id })
-    .then(() => res.status(200).json({ success: true }))
-    .catch((ex: Error) =>
-      res.status(500).json({ success: false, error: ex.message })
-    );
+  try {
+    await SurveyModel.findOneAndDelete({ userId: user._id, _id: id });
+    res.status(200).json({ success: true });
+  } catch (ex) {
+    res.status(500).json({ success: false, error: ex.message });
+  }
 });
 
 export default router;

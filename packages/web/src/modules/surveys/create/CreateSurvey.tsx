@@ -12,6 +12,7 @@ const SURVEY: Survey = {
   description: 'Это шаблон опрос',
   questions: [
     {
+      feature: 'weather',
       name: 'Как вам погода?',
       weight: 1,
       answers: []

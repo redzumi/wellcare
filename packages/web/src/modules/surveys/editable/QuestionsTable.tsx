@@ -23,8 +23,12 @@ const QuestionsTable = (props: Props) => {
     setCurrent(question);
   };
 
-  const handleCreateQuestion = (name: string, weight: number) => {
-    onChange([...questions, { name, weight, answers: [] }]);
+  const handleCreateQuestion = (
+    name: string,
+    feature: string,
+    weight: number
+  ) => {
+    onChange([...questions, { name, feature, weight, answers: [] }]);
   };
 
   const handleDrawerClose = () => setCurrent(null);
@@ -52,10 +56,16 @@ const QuestionsTable = (props: Props) => {
       render: (text: string) => <span>{text}</span>
     },
     {
+      title: 'Признак',
+      dataIndex: 'feature',
+      key: 'feature',
+      render: (text: string) => <span>{text}</span>
+    },
+    {
       title: '',
       key: 'action',
       render: (text, record) => (
-        <Space>
+        <Space direction="vertical">
           <Button
             icon={<EditOutlined />}
             onClick={handleEditQuestion(record)}
