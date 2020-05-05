@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const TestSchema = new Schema({
+const SurveySchema = new Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   reward: { type: Number, required: true },
@@ -24,12 +24,12 @@ const TestSchema = new Schema({
   }
 });
 
-TestSchema.virtual('id').get(function () {
+SurveySchema.virtual('id').get(function () {
   return this._id.toHexString();
 });
 
-TestSchema.set('toJSON', {
+SurveySchema.set('toJSON', {
   virtuals: true
 });
 
-export const TestModel = mongoose.model('test', TestSchema);
+export const SurveyModel = mongoose.model('survey', SurveySchema);

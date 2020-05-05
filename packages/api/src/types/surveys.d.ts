@@ -1,4 +1,4 @@
-type Test = {
+type Survey = {
   _id?: string;
   id: string;
   name: string;
