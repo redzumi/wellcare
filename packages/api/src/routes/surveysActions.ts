@@ -1,5 +1,8 @@
 import express, { Request, Response } from 'express';
 
+import { estimateCovid } from '@wellcare/core';
+import { PredictData } from '@wellcare/core/dist/data';
+
 import { SurveyActionModel } from '../models/SurveyAction';
 import { SurveyModel } from '../models/Survey';
 
@@ -80,5 +83,35 @@ router.patch('/:surveyId', async (req: Request & { user: User }, res, next) => {
     res.status(500).json({ success: false, error: ex.message });
   }
 });
+
+router.get(
+  '/:surveyId/results',
+  async (req: Request & { user: User }, res, next) => {
+    const { user, params } = req;
+
+    try {
+      const surveyAction = await SurveyActionModel.findOne({
+        userId: user._id,
+        surveyId: params.surveyId
+      });
+
+      const surveyQA = surveyAction.surveyQA;
+      const estimatingData = [] as PredictData;
+
+      surveyQA.forEach((element: surveyQA) => {
+        estimatingData.push([
+          element.feature,
+          element.weight,
+          element.answer.weight
+        ]);
+      });
+
+      const probability = estimateCovid(estimatingData);
+      res.status(200).json({ success: true, probability: probability });
+    } catch (ex) {
+      res.status(500).json({ success: false, error: ex.message });
+    }
+  }
+);
 
 export default router;

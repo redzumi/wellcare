@@ -19,3 +19,14 @@ type Answer = {
   weight: number;
   feature: string;
 };
+
+type surveyQA = {
+  name: string;
+  weight: number;
+  feature: string;
+  answer: {
+    name: string;
+    weight: number;
+    feature: string;
+  };
+};
