@@ -3,6 +3,7 @@ import { Row, Col, Space, Empty, Button, Spin } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { useStore } from 'effector-react';
+import chunk from 'lodash.chunk';
 
 import { $ui } from 'store/ui';
 import { $surveys, fetchSurveys } from 'store/surveys';
@@ -40,32 +41,35 @@ const Surveys = () => {
               </Button>
             </Col>
           </Row>
-          <Row>
+          <Space direction="vertical" size="large">
             {surveys.data.length ? (
-              <Col>
-                <Space
-                  direction={
-                    ui.media === UIMedia.Mobile ? 'vertical' : 'horizontal'
-                  }
-                  size="middle"
-                >
-                  {surveys.data.map((survey) => (
-                    <Card
-                      key={survey.id}
-                      id={survey.id}
-                      title={survey.name}
-                      description={survey.description}
-                      onClick={handleSurveyClick(survey.id)}
-                    />
-                  ))}
-                </Space>
-              </Col>
+              chunk(surveys.data, 2).map((row) => (
+                <Row key={JSON.stringify(row)} gutter={[16, 16]}>
+                  <Space
+                    align="start"
+                    direction={
+                      ui.media === UIMedia.Mobile ? 'vertical' : 'horizontal'
+                    }
+                    size="middle"
+                  >
+                    {row.map((survey) => (
+                      <Card
+                        key={survey.id}
+                        id={survey.id}
+                        title={survey.name}
+                        description={survey.description}
+                        onClick={handleSurveyClick(survey.id)}
+                      />
+                    ))}
+                  </Space>
+                </Row>
+              ))
             ) : (
               <div className={styles.empty}>
                 <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
               </div>
             )}
-          </Row>
+          </Space>
         </React.Fragment>
       ) : (
         <Spin spinning />
