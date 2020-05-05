@@ -1,7 +1,8 @@
 {
-  "name": "core",
-  "version": "0.1.0-alpha.0",
+  "name": "@wellcare/core",
+  "version": "0.1.1",
   "main": "dist/main.js",
+  "types": "dist/main.d.ts",
   "scripts": {
     "prewatch": "rimraf dist",
     "watch": "tsc -w",

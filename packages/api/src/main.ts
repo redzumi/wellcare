@@ -4,6 +4,8 @@ import bodyParser from 'body-parser';
 import logger from 'morgan';
 import mongoose from 'mongoose';
 
+import { estimateCovid } from '@wellcare/core';
+
 import { router as auth, passport } from './routes/auth';
 import users from './routes/users';
 import surveys from './routes/surveys';
@@ -14,6 +16,7 @@ const PORT = 4000;
 const URL = process.env.DB_URL || 'localhost:27017';
 
 console.log(`DB url: ${URL}`);
+console.log(estimateCovid);
 
 mongoose.connect(`mongodb://${URL}/wellcare`, {
   useNewUrlParser: true,
