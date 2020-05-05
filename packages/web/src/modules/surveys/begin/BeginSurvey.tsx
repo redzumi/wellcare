@@ -13,7 +13,7 @@ import styles from './styles.styl';
 
 const BeginSurvey = () => {
   const { id } = useParams();
-  const { ready, data: surveys } = useStore($surveys);
+  const { data: surveys } = useStore($surveys);
   const currentSurvey = surveys.find((survey) => survey.id === id);
 
   const [isStarted, setIsStarted] = useState(false);
