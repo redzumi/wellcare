@@ -83,31 +83,34 @@ router.patch('/:surveyId', async (req: Request & { user: User }, res, next) => {
   }
 });
 
-router.get('/results', async (req: Request & { user: User }, res, next) => {
-  const { user, params, body } = req;
+router.get(
+  '/:surveyId/results',
+  async (req: Request & { user: User }, res, next) => {
+    const { user, params } = req;
 
-  try {
-    const surveyAction = await SurveyActionModel.findOne({
-      userId: user._id,
-      surveyId: params.surveyId
-    });
+    try {
+      const surveyAction = await SurveyActionModel.findOne({
+        userId: user._id,
+        surveyId: params.surveyId
+      });
 
-    const surveyQA = surveyAction.surveyQA;
-    const estimatingData = [] as PredictData;
+      const surveyQA = surveyAction.surveyQA;
+      const estimatingData = [] as PredictData;
 
-    surveyQA.forEach((element: surveyQA) => {
-      estimatingData.push([
-        element.feature,
-        element.weight,
-        element.answer.weight
-      ]);
-    });
+      surveyQA.forEach((element: surveyQA) => {
+        estimatingData.push([
+          element.feature,
+          element.weight,
+          element.answer.weight
+        ]);
+      });
 
-    const probability = estimateCovid(estimatingData);
-    res.status(200).json({ success: true, probability: probability });
-  } catch (ex) {
-    res.status(500).json({ success: false, error: ex.message });
+      const probability = estimateCovid(estimatingData);
+      res.status(200).json({ success: true, probability: probability });
+    } catch (ex) {
+      res.status(500).json({ success: false, error: ex.message });
+    }
   }
-});
+);
 
 export default router;
