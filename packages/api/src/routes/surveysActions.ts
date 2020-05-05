@@ -35,16 +35,38 @@ router.post('/:surveyId', async (req: Request & { user: User }, res, next) => {
 
 router.patch('/:surveyId', async (req: Request & { user: User }, res, next) => {
   const { user, params, body } = req;
-  const { name, answer } = body;
+  const { question, answer } = body;
 
   try {
-    const survey = await SurveyModel.find({ _id: params.surveyId });
-    const surveyAction = await SurveyActionModel.find({
+    const survey = await SurveyModel.findOne({ _id: params.surveyId });
+    const surveyAction = await SurveyActionModel.findOne({
       userId: user._id,
       surveyId: params.surveyId
     });
 
-    console.log(name, answer);
+    const surveyQuestion = survey.questions.find(
+      (q: Question) => q.feature === question
+    );
+
+    const surveyAnswer = surveyQuestion.answers.find(
+      (a: Answer) => a.feature === answer
+    );
+
+    const surveyQA = [
+      ...surveyAction.surveyQA,
+      {
+        name: surveyQuestion.name,
+        weight: surveyQuestion.weight,
+        feature: surveyQuestion.feature,
+        answer: {
+          name: surveyAnswer.name,
+          weight: surveyAnswer.weight,
+          feature: surveyAnswer.feature
+        }
+      }
+    ];
+
+    await surveyAction.updateOne({ surveyQA });
     res.status(200).json({ success: true });
   } catch (ex) {
     res.status(500).json({ success: false, error: ex.message });
