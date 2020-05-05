@@ -7,7 +7,7 @@
     "watch": "tsc -w",
     "prebuild": "rimraf dist",
     "build": "tsc",
-    "dev": "tsc-watch --onSuccess 'node dist/main.js'",
+    "dev": "tsc-watch --onSuccess 'node dist/api/src/main.js'",
     "start": "cross-env DB_URL=mongo:27017 node dist/main.js",
     "lint": "prettier --write src/"
   },

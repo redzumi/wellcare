@@ -10,9 +10,9 @@ const estimateCovid = (data: PredictData) => {
     0
   );
 
-  console.log(overallProbability);
-
   return overallProbability;
 };
+
+export default estimateCovid;
 
 main();

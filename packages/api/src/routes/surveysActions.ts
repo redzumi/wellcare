@@ -2,6 +2,8 @@ import express, { Request, Response } from 'express';
 
 import { SurveyActionModel } from '../models/SurveyAction';
 import { SurveyModel } from '../models/Survey';
+import estimateCovid from '../../../core/src/main';
+import { PredictData } from '../../../core/src/data';
 
 const router = express.Router();
 
@@ -76,6 +78,33 @@ router.patch('/:surveyId', async (req: Request & { user: User }, res, next) => {
 
     await surveyAction.updateOne({ surveyQA });
     res.status(200).json({ success: true });
+  } catch (ex) {
+    res.status(500).json({ success: false, error: ex.message });
+  }
+});
+
+router.get('/results', async (req: Request & { user: User }, res, next) => {
+  const { user, params, body } = req;
+
+  try {
+    const surveyAction = await SurveyActionModel.findOne({
+      userId: user._id,
+      surveyId: params.surveyId
+    });
+
+    const surveyQA = surveyAction.surveyQA;
+    const estimatingData = [] as PredictData;
+
+    surveyQA.forEach((element: surveyQA) => {
+      estimatingData.push([
+        element.feature,
+        element.weight,
+        element.answer.weight
+      ]);
+    });
+
+    const probability = estimateCovid(estimatingData);
+    res.status(200).json({ success: true, probability: probability });
   } catch (ex) {
     res.status(500).json({ success: false, error: ex.message });
   }
