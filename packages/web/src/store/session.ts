@@ -1,14 +1,12 @@
 import axios from 'axios';
 import { message } from 'antd';
 import { createStore, createEffect, Store } from 'effector';
-
-type LoginData = { email: string; password: string };
-type RegisterData = {} & User;
+import jwtDecode from 'jwt-decode';
 
 const $session: Store<SessionState> = createStore({});
 
-const loginUser = createEffect<LoginData, string>({
-  handler: async (loginData: LoginData) => {
+const loginUser = createEffect<{ email: string; password: string }, string>({
+  handler: async (loginData) => {
     const { data } = await axios.post('/api/v1/auth/login', loginData);
     const { token } = data;
 
@@ -21,6 +19,7 @@ const loginUser = createEffect<LoginData, string>({
 
 $session.on(loginUser.done, (state, payload) => ({
   ...state,
+  ...jwtDecode(payload.result),
   token: payload.result
 }));
 
@@ -28,8 +27,8 @@ loginUser.fail.watch(() => {
   message.error('Что-то пошло не так');
 });
 
-const registerUser = createEffect<RegisterData, string>({
-  handler: async (registerData: LoginData) => {
+const registerUser = createEffect<User, string>({
+  handler: async (registerData: User) => {
     const { data } = await axios.post('/api/v1/auth/signup', registerData);
     const { token } = data;
 
@@ -42,6 +41,7 @@ const registerUser = createEffect<RegisterData, string>({
 
 $session.on(registerUser.done, (state, payload) => ({
   ...state,
+  ...jwtDecode(payload.result),
   token: payload.result
 }));
 
@@ -58,6 +58,7 @@ const checkSession = createEffect<void, string>({
     }
 
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+    await axios.get('/api/v1/users/me');
 
     return token;
   }
@@ -65,6 +66,7 @@ const checkSession = createEffect<void, string>({
 
 $session.on(checkSession.done, (state, payload) => ({
   ...state,
+  ...jwtDecode(payload.result),
   token: payload.result
 }));
 
