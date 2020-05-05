@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react';
-import { Result, Card, Row, Space, Divider, Statistic } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Result, Card, Row, Space, Divider, Statistic, Spin } from 'antd';
 import { useParams } from 'react-router-dom';
 import { useStore } from 'effector-react';
-import { ArrowUpOutlined } from '@ant-design/icons';
-import { $surveys, fetchSurveys } from 'store/surveys';
+import { ArrowUpOutlined, SmileOutlined } from '@ant-design/icons';
+
+import { $surveys, fetchSurveys, predictSurvey } from 'store/surveys';
+
 import Paper from 'common/page/paper/Paper';
+import SurveyResults from './SurveyResults';
 
 const FinishSurvey = () => {
   const { id } = useParams();
 
+  const [result, setResult] = useState<number | null>(null);
   const { ready, data: surveys } = useStore($surveys);
   const currentSurvey = surveys.find((survey) => survey.id === id);
 
@@ -18,9 +22,22 @@ const FinishSurvey = () => {
     }
   }, [ready]);
 
+  useEffect(() => {
+    if (currentSurvey) {
+      const fetchResult = async () => {
+        setResult(await predictSurvey(currentSurvey));
+      };
+      fetchResult();
+    }
+  }, [id, currentSurvey]);
+
   return (
     <Paper title={currentSurvey?.name}>
-      <Result status="success" />
+      <Result
+        icon={<SmileOutlined />}
+        status="success"
+        title="Вы прошли опрос!"
+      />
       <Divider />
       <Row justify="center">
         <Space>
@@ -46,7 +63,7 @@ const FinishSurvey = () => {
           </Card>
         </Space>
         <Divider />
-        <Row>Ваша группа риска:</Row>
+        {result ? <SurveyResults probability={result} /> : <Spin spinning />}
       </Row>
     </Paper>
   );

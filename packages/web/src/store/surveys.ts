@@ -82,22 +82,17 @@ deleteSurvey.fail.watch(() => {
   message.error('Что-то пошло не так');
 });
 
-const getSurveyResult = createEffect({
+const predictSurvey = createEffect<Survey, number>({
   handler: async (survey: Survey) => {
     const { data } = await axios.get(
       `/api/v1/surveys/actions/${survey.id}/results`
     );
-    return data;
+
+    return data.probability;
   }
 });
 
-$surveys.on(getSurveyResult.done, (state, payload) => ({
-  ...state,
-  ready: true,
-  data: payload.result
-}));
-
-fetchSurveys.fail.watch(() => {
+predictSurvey.fail.watch(() => {
   message.error('Что-то пошло не так');
 });
 
@@ -107,5 +102,5 @@ export {
   createSurvey,
   saveSurvey,
   deleteSurvey,
-  getSurveyResult
+  predictSurvey
 };

@@ -1,9 +1,10 @@
 import express, { Request, Response } from 'express';
 
+import { estimateCovid } from '@wellcare/core';
+import { PredictData } from '@wellcare/core/dist/data';
+
 import { SurveyActionModel } from '../models/SurveyAction';
 import { SurveyModel } from '../models/Survey';
-import { estimateCovid } from '@wellcare/core';
-import { PredictData } from '../../../core/src/data';
 
 const router = express.Router();
 
