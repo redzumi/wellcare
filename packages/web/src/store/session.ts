@@ -9,7 +9,7 @@ const $session: Store<SessionState> = createStore({});
 
 const loginUser = createEffect<LoginData, string>({
   handler: async (loginData: LoginData) => {
-    const { data } = await axios.post('/api/v1/auth/login', loginData);
+    const { data } = await axios.post('https://wellcare.evely.net/api/v1/auth/login', loginData);
     const { token } = data;
 
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -30,7 +30,7 @@ loginUser.fail.watch(() => {
 
 const registerUser = createEffect<RegisterData, string>({
   handler: async (registerData: LoginData) => {
-    const { data } = await axios.post('/api/v1/auth/signup', registerData);
+    const { data } = await axios.post('https://wellcare.evely.net/api/v1/auth/signup', registerData);
     const { token } = data;
 
     axios.defaults.headers.common.Authorization = `Bearer ${token}`;

@@ -1,29 +1,21 @@
 import React, { useState } from 'react';
 import { Card, Descriptions, Button, Space } from 'antd';
+import { useParams } from 'react-router-dom';
 import Paper from 'common/page/paper/Paper';
+
+import { useStore } from 'effector-react';
+
+import { $surveys } from 'store/surveys';
 
 import SurveyQuestions from './SurveyQuestions';
 
 import styles from './styles.styl';
 
-const QUEST = {
-  imgQuestionSrc:
-    'https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png',
-  questionCount: '21',
-  questionTitle: 'Pupa',
-  questionDescription:
-    'Диссертация – это квалификационный труд, который пишется научным сотрудником для присуждения звания или степени. Различают всего три вида диссертации: магистерскую, кандидатскую и докторскую. Перед тем, как рассказать о том, как правильно писать диссертацию, давайте подробно рассмотрим каждую разновидность этого научного труда.',
-  answersOptions: ['pupa', 'lupa', 'zalupa']
-};
+const BeginSurvey = () => {
+  const { id } = useParams();
+  const { ready, data: surveys } = useStore($surveys);
+  const currentSurvey = surveys.find((survey) => survey.id === id);
 
-type Props = {
-  title: string;
-  description: string;
-  imgSrc: string;
-};
-
-const BeginSurvey = (props: Props) => {
-  const { title, description, imgSrc } = props;
   const [isStarted, setIsStarted] = useState(false);
 
   const handleStart = () => {
@@ -35,25 +27,13 @@ const BeginSurvey = (props: Props) => {
       <Paper>
         <Space align="center" direction="vertical" size="middle">
           <Card
-            title="Тест на коронавирус"
+            title={currentSurvey?.name}
             bordered={false}
             className={styles.cardTitle}
-            cover={
-              <img
-                alt="example"
-                src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
-                className={styles.surveyImg}
-              />
-            }
           >
             <Descriptions layout="vertical">
               <Descriptions.Item>
-                Диссертация – это квалификационный труд, который пишется научным
-                сотрудником для присуждения звания или степени. Различают всего
-                три вида диссертации: магистерскую, кандидатскую и докторскую.
-                Перед тем, как рассказать о том, как правильно писать
-                диссертацию, давайте подробно рассмотрим каждую разновидность
-                этого научного труда.
+                {currentSurvey?.description}
               </Descriptions.Item>
             </Descriptions>
           </Card>
