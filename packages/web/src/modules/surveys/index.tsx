@@ -52,6 +52,7 @@ const Surveys = () => {
                   {surveys.data.map((survey) => (
                     <Card
                       key={survey.id}
+                      id={survey.id}
                       title={survey.name}
                       description={survey.description}
                       onClick={handleSurveyClick(survey.id)}

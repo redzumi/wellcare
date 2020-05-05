@@ -17,7 +17,11 @@ const Paper = (props: Props) => {
 
   return (
     <div className={styles.paper}>
-      <PageHeader className={styles.header} title={title} onBack={handleBack} />
+      <PageHeader
+        className={styles.header}
+        title={title || ' '}
+        onBack={handleBack}
+      />
       {children || <Empty />}
     </div>
   );
