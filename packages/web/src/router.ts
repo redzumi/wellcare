@@ -3,6 +3,7 @@ import Home from 'modules/home';
 import Surveys from 'modules/surveys';
 import CreateSurvey from 'modules/surveys/create/CreateSurvey';
 import SingleSurvey from 'modules/surveys/single/SingleSurvey';
+import BeginSurvey from 'modules/surveys/begin/BeginSurvey';
 
 import Recommends from 'modules/recommends';
 import Articles from 'modules/articles';
@@ -27,6 +28,7 @@ export const ROUTES = [
   { pathname: '/surveys', module: Surveys },
   { pathname: '/surveys/new', module: CreateSurvey },
   { pathname: '/surveys/:id', module: SingleSurvey },
+  { pathname: '/surveys/begin/:id', module: BeginSurvey },
 
   { pathname: '/recommends', module: Recommends },
   { pathname: '/articles', module: Articles },
