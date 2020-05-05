@@ -32,8 +32,8 @@ const AnswersDrawer = (props: Props) => {
     }
   };
 
-  const handleFinish = (name: string, weight: number) => {
-    setAnswers([...answers, { name, weight }]);
+  const handleFinish = (name: string, feature: string, weight: number) => {
+    setAnswers([...answers, { name, feature, weight }]);
   };
 
   const handleDeleteAnswer = (answer: Answer) => () => {
@@ -54,10 +54,16 @@ const AnswersDrawer = (props: Props) => {
       render: (text: string) => <span>{text}</span>
     },
     {
+      title: 'Признак',
+      dataIndex: 'feature',
+      key: 'feature',
+      render: (text: string) => <span>{text}</span>
+    },
+    {
       title: '',
       key: 'action',
       render: (text, record) => (
-        <Space>
+        <Space direction="vertical">
           <Button
             icon={<DeleteOutlined />}
             onClick={handleDeleteAnswer(record)}

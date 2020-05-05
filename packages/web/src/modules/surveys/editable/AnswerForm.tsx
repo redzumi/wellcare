@@ -4,13 +4,14 @@ import { PlusOutlined } from '@ant-design/icons';
 import { Store } from 'antd/lib/form/interface';
 
 type Props = {
-  onFinish: (name: string, weight: number) => void;
+  onFinish: (name: string, feature: string, weight: number) => void;
 };
 
 const AnswerForm = (props: Props) => {
   const { onFinish } = props;
 
-  const handleSubmit = (values: Store) => onFinish(values.name, values.weight);
+  const handleSubmit = (values: Store) =>
+    onFinish(values.name, values.feature, values.weight);
 
   return (
     <Form
@@ -43,6 +44,18 @@ const AnswerForm = (props: Props) => {
         ]}
       >
         <InputNumber />
+      </Form.Item>
+      <Form.Item
+        label="Признак"
+        name="feature"
+        rules={[
+          {
+            required: true,
+            message: 'Пожалуйста, введите признак вопроса'
+          }
+        ]}
+      >
+        <Input />
       </Form.Item>
       <Form.Item>
         <Button htmlType="submit" icon={<PlusOutlined />}>

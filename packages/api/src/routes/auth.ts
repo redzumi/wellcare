@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request } from 'express';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 import { Strategy as LocalStrategy } from 'passport-local';
@@ -53,7 +53,8 @@ passport.use(
           firstName,
           lastName,
           email,
-          password
+          password,
+          role: UserRole.Default
         });
 
         done(null, user);
@@ -96,11 +97,10 @@ passport.use(
 router.post(
   '/signup',
   passport.authenticate('signup', { session: false }),
-  async (req, res, next) => {
+  async (req: Request & { user: User }, res, next) => {
     const user = req.user;
 
-    // @ts-ignore
-    const body = { _id: user._id, email: user.email };
+    const body = { _id: user._id, email: user.email, role: user.role };
     const token = jwt.sign({ user: body }, SECRET);
 
     res.json({
@@ -113,11 +113,10 @@ router.post(
 router.post(
   '/login',
   passport.authenticate('login', { session: false }),
-  async (req, res, next) => {
+  async (req: Request & { user: User }, res, next) => {
     const user = req.user;
 
-    // @ts-ignore
-    const body = { _id: user._id, email: user.email };
+    const body = { _id: user._id, email: user.email, role: user.role };
     const token = jwt.sign({ user: body }, SECRET);
 
     res.json({
