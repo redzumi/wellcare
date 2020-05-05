@@ -42,7 +42,7 @@ const News = (props: { title: string; description: string; image: string }) => {
 
   return (
     <Card
-      style={{ width: 312 }}
+      style={{ width: 300 }}
       hoverable
       bordered={false}
       cover={<img alt="example" src={image} />}
