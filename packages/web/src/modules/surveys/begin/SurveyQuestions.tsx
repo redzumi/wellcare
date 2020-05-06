@@ -109,7 +109,7 @@ const SurveyQuestions = () => {
                 </Button>
               </Popover>
             </Row>
-            <Card title={currQuestion.name}>
+            <Card title={currQuestion.name} className={styles.card}>
               <Space direction="vertical" size="middle">
                 <Form
                   key={currQuestion.feature}
