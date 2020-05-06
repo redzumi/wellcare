@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Divider, Table, Drawer, Button, Space } from 'antd';
+import { Divider, Typography, Table, Drawer, Button, Space } from 'antd';
 import { useStore } from 'effector-react';
 import { ColumnProps } from 'antd/lib/table';
 
@@ -7,18 +7,22 @@ import { DeleteOutlined } from '@ant-design/icons';
 
 import { $ui } from 'store/ui';
 
+import QuestionForm from './QuestionForm';
 import AnswerForm from './AnswerForm';
 
 type Props = {
   question: Question | null;
-  onClose: () => void;
   onChange: (question: Question) => void;
+  onClose: () => void;
 };
 
-const AnswersDrawer = (props: Props) => {
-  const { question, onChange } = props;
-  const ui = useStore($ui);
+const { Title } = Typography;
+
+const EditQuestionDrawer = (props: Props) => {
+  const { question, onChange, onClose } = props;
   const [answers, setAnswers] = useState<Answer[]>(question?.answers || []);
+
+  const ui = useStore($ui);
 
   useEffect(() => {
     if (question) {
@@ -26,18 +30,22 @@ const AnswersDrawer = (props: Props) => {
     }
   }, [question]);
 
-  const handleClose = () => {
-    if (question) {
-      onChange({ ...question, answers });
-    }
-  };
+  const handleClose = () => onClose();
 
-  const handleFinish = (name: string, feature: string, weight: number) => {
+  const handleAnswerCreate = (
+    name: string,
+    feature: string,
+    weight: number
+  ) => {
     setAnswers([...answers, { name, feature, weight }]);
   };
 
-  const handleDeleteAnswer = (answer: Answer) => () => {
-    setAnswers(answers.filter((a) => a.name !== answer.name));
+  const handleAnswerDelete = (answer: Answer) => () => {
+    setAnswers(answers.filter((a) => a.feature !== answer.feature));
+  };
+
+  const handleQuestionsChange = (value: Question) => {
+    onChange({ ...question, ...value, answers });
   };
 
   const columns: ColumnProps<Answer>[] = [
@@ -66,7 +74,7 @@ const AnswersDrawer = (props: Props) => {
         <Space direction="vertical">
           <Button
             icon={<DeleteOutlined />}
-            onClick={handleDeleteAnswer(record)}
+            onClick={handleAnswerDelete(record)}
           />
         </Space>
       )
@@ -83,8 +91,13 @@ const AnswersDrawer = (props: Props) => {
       onClose={handleClose}
       visible={Boolean(question)}
     >
-      <AnswerForm onFinish={handleFinish} />
+      {question && (
+        <QuestionForm question={question} onFinish={handleQuestionsChange} />
+      )}
       <Divider dashed />
+      <Title level={4}>Ответы</Title>
+      <Divider dashed />
+      <AnswerForm onFinish={handleAnswerCreate} />
       <Table
         columns={columns}
         dataSource={answers.map((data) => ({ ...data, key: data.name }))}
@@ -93,4 +106,4 @@ const AnswersDrawer = (props: Props) => {
   );
 };
 
-export default AnswersDrawer;
+export default EditQuestionDrawer;

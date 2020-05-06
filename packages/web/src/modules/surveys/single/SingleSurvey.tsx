@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useStore } from 'effector-react';
-import { Empty, Spin } from 'antd';
+import { Empty, Spin, message } from 'antd';
 
 import {
   $surveys,
@@ -26,7 +26,8 @@ const CreateSurvey = () => {
   }, [ready]);
 
   const handleSave = async (value: Survey) => {
-    saveSurvey(value);
+    await saveSurvey(value);
+    message.success('Сохранено!');
   };
 
   const handleDelete = async (value: Survey) => {

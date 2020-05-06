@@ -3,11 +3,12 @@ import { Form, Input, InputNumber, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 
 type Props = {
+  question?: Question;
   onFinish: (value: Partial<Question>) => void;
 };
 
 const QuestionForm = (props: Props) => {
-  const { onFinish } = props;
+  const { question, onFinish } = props;
 
   const handleSubmit = (values: Partial<Question>) =>
     onFinish({
@@ -16,7 +17,7 @@ const QuestionForm = (props: Props) => {
     });
 
   return (
-    <Form name="survey" onFinish={handleSubmit}>
+    <Form name="survey" initialValues={question} onFinish={handleSubmit}>
       <Form.Item
         label="Текст"
         name="name"
@@ -27,7 +28,7 @@ const QuestionForm = (props: Props) => {
           }
         ]}
       >
-        <Input />
+        <Input.TextArea />
       </Form.Item>
       <Form.Item
         label="Вес"
@@ -66,9 +67,15 @@ const QuestionForm = (props: Props) => {
         <Input.TextArea rows={4} />
       </Form.Item>
       <Form.Item>
-        <Button htmlType="submit" icon={<PlusOutlined />}>
-          Добавить вопрос
-        </Button>
+        {question ? (
+          <Button type="primary" ghost htmlType="submit">
+            Сохранить
+          </Button>
+        ) : (
+          <Button type="primary" htmlType="submit" icon={<PlusOutlined />}>
+            Добавить вопрос
+          </Button>
+        )}
       </Form.Item>
     </Form>
   );
