@@ -10,6 +10,7 @@ type Survey = {
 type Question = {
   name: string;
   weight: number;
+  reason: string;
   feature: string;
   answers: Answer[];
 };

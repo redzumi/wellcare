@@ -10,6 +10,7 @@ const SurveySchema = new Schema({
       name: String,
       weight: Number,
       feature: String,
+      reason: String,
       answers: [
         {
           name: String,

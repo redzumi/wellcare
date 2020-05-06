@@ -48,8 +48,8 @@ router.post('/', async (req: Request & { user: User }, res, next) => {
   }
 });
 
-router.put('/:id', async (req: Request & { user: User }, res) => {
-  const { user, body, params } = req;
+router.put('/:id', async (req, res) => {
+  const { body, params } = req;
   const { id } = params;
 
   try {
@@ -60,8 +60,8 @@ router.put('/:id', async (req: Request & { user: User }, res) => {
   }
 });
 
-router.delete('/:id', async (req: Request & { user: User }, res, next) => {
-  const { user, params } = req;
+router.delete('/:id', async (req, res, next) => {
+  const { params } = req;
   const { id } = params;
 
   try {
