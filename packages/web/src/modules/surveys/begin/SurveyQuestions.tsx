@@ -9,7 +9,8 @@ import {
   Popover,
   Button,
   Spin,
-  Form
+  Form,
+  Breadcrumb
 } from 'antd';
 import { useStore } from 'effector-react';
 import { useParams, Redirect } from 'react-router-dom';
@@ -68,11 +69,18 @@ const SurveyQuestions = () => {
   return (
     <Paper>
       <Space direction="vertical" size="large" className={styles.questions}>
-        <Steps current={currentIndex} size="small">
-          {questions.map((question) => (
-            <Step key={question.name} />
-          ))}
-        </Steps>
+        {media === UIMedia.Desktop ? (
+          <Steps current={currentIndex} size="small">
+            {questions.map((question) => (
+              <Step key={question.name} />
+            ))}
+          </Steps>
+        ) : (
+          <Breadcrumb>
+            <Breadcrumb.Item>{(currentIndex + 1).toString()}</Breadcrumb.Item>
+            <Breadcrumb.Item>{questions.length.toString()}</Breadcrumb.Item>
+          </Breadcrumb>
+        )}
         <Row justify="center">
           <Col span={media === UIMedia.Mobile ? 24 : 12}>
             <Row justify="end">

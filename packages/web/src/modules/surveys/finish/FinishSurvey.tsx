@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Result, Card, Row, Space, Divider, Statistic, Spin } from 'antd';
+import { Result, Row, Divider, Spin } from 'antd';
 import { useParams } from 'react-router-dom';
 import { useStore } from 'effector-react';
-import { ArrowUpOutlined, SmileOutlined } from '@ant-design/icons';
+import { SmileOutlined } from '@ant-design/icons';
 
 import { $surveys, fetchSurveys, predictSurvey } from 'store/surveys';
 

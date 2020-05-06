@@ -1,5 +1,14 @@
 # wellcare
 
+## install
+
+```
+yarn
+yarn bootstrap
+# just for typings from api / core / etc
+yarn build --ignore web
+```
+
 ```
 # build and run mongo:
 docker run -d -p 127.0.0.1:27017:27017 --name wellcare-db mongo

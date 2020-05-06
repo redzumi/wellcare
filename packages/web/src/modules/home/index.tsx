@@ -43,9 +43,8 @@ const News = (props: { title: string; description: string; image: string }) => {
   return (
     <Card
       style={{ width: 300 }}
-      hoverable
-      bordered={false}
-      cover={<img alt="example" src={image} />}
+      bordered
+      cover={<img alt="cover" src={image} />}
     >
       <Meta
         avatar={<Avatar icon={<UserOutlined />} />}
