@@ -1,6 +1,6 @@
 {
   "name": "@wellcare/api",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "dist/main.js",
   "scripts": {
     "prewatch": "rimraf dist",
@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@wellcare/core": "^0.1.1",
+    "@wellcare/core": "^0.2.0",
     "bcrypt": "^4.0.1",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
