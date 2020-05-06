@@ -6,8 +6,11 @@ import {
   Steps,
   Button,
   Row,
-  Descriptions
+  Descriptions,
+  Space
 } from 'antd';
+import { ArrowRightOutlined } from '@ant-design/icons';
+import { Link } from 'react-router-dom';
 
 import styles from './styles.styl';
 import Status from './Status';
@@ -20,60 +23,51 @@ const { Title } = Typography;
 const { Content } = Layout;
 const { Step } = Steps;
 
+const Description = (props: { children: React.ReactNode }) => (
+  <Descriptions layout="vertical">
+    <Descriptions.Item>
+      <div style={{ fontSize: 18 }}>{props.children}</div>
+    </Descriptions.Item>
+  </Descriptions>
+);
 const steps = [
   {
     title: 'Мойте руки',
     content: () => (
-      <Descriptions layout="vertical">
-        <Descriptions.Item>
-          <div style={{ fontSize: 18 }}>
-            Всегда мойте руки: когда приходите на работу или возвращаетесь
-            домой. Для профилактики также подойдут влажные салфетки или
-            дезинфицирующие растворы
-          </div>
-        </Descriptions.Item>
-      </Descriptions>
+      <Description>
+        Всегда мойте руки: когда приходите на работу или возвращаетесь домой.
+        Для профилактики также подойдут влажные салфетки или дезинфицирующие
+        растворы
+      </Description>
     )
   },
   {
     title: 'Не трогайте лицо руками',
     content: () => (
-      <Descriptions layout="vertical">
-        <Descriptions.Item>
-          <div style={{ fontSize: 18 }}>
-            Не трогайте лицо руками Не подносите руки к носу и глазам. Быстрее
-            всего вирус попадает в организм через слизистую оболочку. Когда
-            чихаете всегда прикрывайтесь платком
-          </div>
-        </Descriptions.Item>
-      </Descriptions>
+      <Description>
+        Не трогайте лицо руками Не подносите руки к носу и глазам. Быстрее всего
+        вирус попадает в организм через слизистую оболочку. Когда чихаете всегда
+        прикрывайтесь платком
+      </Description>
     )
   },
   {
     title: 'Избегайте больших скоплений людей',
     content: () => (
-      <Descriptions layout="vertical">
-        <Descriptions.Item>
-          <div style={{ fontSize: 18 }}>
-            Избегайте больших скоплений людей Избегайте ненужных поездок и не
-            ходите в места массового скопления людей
-          </div>
-        </Descriptions.Item>
-      </Descriptions>
+      <Description>
+        Избегайте больших скоплений людей Избегайте ненужных поездок и не ходите
+        в места массового скопления людей
+      </Description>
     )
   },
   {
     title: 'Отмените путешествия',
     content: () => (
-      <Descriptions layout="vertical">
-        <Descriptions.Item>
-          <div style={{ fontSize: 18 }}>
-            На время, пока разные страны мира борются с корона вирусом, не
-            следует путешествовать заграницу. В особенности туда, где ситуация с
-            коронавирусом крайне тяжелая
-          </div>
-        </Descriptions.Item>
-      </Descriptions>
+      <Description>
+        На время, пока разные страны мира борются с корона вирусом, не следует
+        путешествовать заграницу. В особенности туда, где ситуация с
+        коронавирусом крайне тяжелая
+      </Description>
     )
   }
 ];
@@ -130,7 +124,7 @@ const SurveyResults = (props: Props) => {
 
   return (
     <React.Fragment>
-      <Content>
+      <Content className={styles.content}>
         <Row justify="center">{getTitleByProbability(probability)}</Row>
         <Divider dashed />
         <Steps current={current}>
@@ -142,17 +136,25 @@ const SurveyResults = (props: Props) => {
           {steps[current].content()}
         </div>
         <div className={styles['steps-action']}>
-          {current > 0 && (
-            <Button style={{ margin: '0 8px' }} onClick={handleClickPrev}>
-              Предыдущий совет
-            </Button>
-          )}
-          {current < steps.length - 1 && (
-            <Button type="primary" onClick={handleClickNext}>
-              Следущий совет
-            </Button>
-          )}
+          <Space direction="vertical">
+            {current < steps.length - 1 && (
+              <Button type="primary" size="large" onClick={handleClickNext}>
+                Следущий совет
+              </Button>
+            )}
+            {current > 0 && (
+              <Button size="large" onClick={handleClickPrev}>
+                Предыдущий совет
+              </Button>
+            )}
+          </Space>
         </div>
+        <Divider dashed />
+        <Link to="/surveys">
+          <Button onClick={handleClickNext} icon={<ArrowRightOutlined />}>
+            Вернуться к опросам
+          </Button>
+        </Link>
         <Divider dashed />
         <Row justify="center">
           <Status />

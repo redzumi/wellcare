@@ -45,7 +45,7 @@ const DataForm = (props: Props) => {
             }
           ]}
         >
-          <Input />
+          <Input.TextArea rows={4} />
         </Form.Item>
         <Form.Item
           label="Описание опроса"

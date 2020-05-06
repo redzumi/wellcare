@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 import CovidIcon from 'common/icons/covid/CovidIcon';
 import HealthIcon from 'common/icons/health/HealthIcon';
 
+import styles from './styles.styl';
+
 type Props = {
   id: string;
   title: string;
@@ -45,7 +47,13 @@ const SurveyCard = (props: Props) => {
   };
 
   return (
-    <Card title={title} bordered hoverable onClick={onClick}>
+    <Card
+      title={title}
+      bordered
+      hoverable
+      onClick={onClick}
+      className={styles.card}
+    >
       {getIconByTitle(title)}
       <Descriptions layout="vertical">
         <Descriptions.Item>{description}</Descriptions.Item>
