@@ -54,16 +54,7 @@ const QuestionForm = (props: Props) => {
       >
         <Input />
       </Form.Item>
-      <Form.Item
-        label="Причина"
-        name="reason"
-        rules={[
-          {
-            required: true,
-            message: 'Пожалуйста, введите причину вопроса'
-          }
-        ]}
-      >
+      <Form.Item label="Причина" name="reason">
         <Input.TextArea rows={4} />
       </Form.Item>
       <Form.Item>
