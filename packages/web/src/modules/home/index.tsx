@@ -41,11 +41,7 @@ const News = (props: { title: string; description: string; image: string }) => {
   const { title, description, image } = props;
 
   return (
-    <Card
-      style={{ width: 300 }}
-      bordered
-      cover={<img alt="cover" src={image} />}
-    >
+    <Card bordered cover={<img alt="cover" src={image} />}>
       <Meta
         avatar={<Avatar icon={<UserOutlined />} />}
         title={title}

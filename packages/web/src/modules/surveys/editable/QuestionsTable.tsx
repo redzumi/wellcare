@@ -44,7 +44,21 @@ const QuestionsTable = (props: Props) => {
       title: 'Вопрос',
       dataIndex: 'name',
       key: 'name',
-      render: (text: string) => <span>{text}</span>
+      render: (text: string, record: Question) => (
+        <Space direction="vertical">
+          <Space direction="horizontal">
+            <Button
+              icon={<EditOutlined />}
+              onClick={handleQuestionEdit(record)}
+            />
+            <Button
+              icon={<DeleteOutlined />}
+              onClick={handleQuestionDelete(record)}
+            />
+          </Space>
+          {text}
+        </Space>
+      )
     },
     {
       title: 'Вес',
@@ -57,22 +71,6 @@ const QuestionsTable = (props: Props) => {
       dataIndex: 'feature',
       key: 'feature',
       render: (text: string) => <span>{text}</span>
-    },
-    {
-      title: '',
-      key: 'action',
-      render: (text, record) => (
-        <Space direction="vertical">
-          <Button
-            icon={<EditOutlined />}
-            onClick={handleQuestionEdit(record)}
-          />
-          <Button
-            icon={<DeleteOutlined />}
-            onClick={handleQuestionDelete(record)}
-          />
-        </Space>
-      )
     }
   ];
 

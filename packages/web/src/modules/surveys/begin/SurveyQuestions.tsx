@@ -114,11 +114,17 @@ const SurveyQuestions = () => {
                 >
                   <Form.Item name="answer">
                     <Radio.Group>
-                      {currQuestion.answers.map((answer: Answer) => (
-                        <Radio key={answer.name} value={answer.feature}>
-                          {answer.name}
-                        </Radio>
-                      ))}
+                      <Space direction="vertical" size="middle">
+                        {currQuestion.answers.map((answer: Answer) => (
+                          <Radio
+                            key={answer.name}
+                            value={answer.feature}
+                            className={styles.radio}
+                          >
+                            {answer.name}
+                          </Radio>
+                        ))}
+                      </Space>
                     </Radio.Group>
                   </Form.Item>
                   <Form.Item>
