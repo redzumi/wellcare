@@ -23,12 +23,8 @@ const QuestionsTable = (props: Props) => {
     setCurrent(question);
   };
 
-  const handleCreateQuestion = (
-    name: string,
-    feature: string,
-    weight: number
-  ) => {
-    onChange([...questions, { name, feature, weight, answers: [] }]);
+  const handleCreateQuestion = (value: Question) => {
+    onChange([...questions, { ...value }]);
   };
 
   const handleDrawerClose = () => setCurrent(null);

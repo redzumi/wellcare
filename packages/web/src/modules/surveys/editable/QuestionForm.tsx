@@ -1,17 +1,19 @@
 import React from 'react';
 import { Form, Input, InputNumber, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { Store } from 'antd/lib/form/interface';
 
 type Props = {
-  onFinish: (name: string, feature: string, weight: number) => void;
+  onFinish: (value: Partial<Question>) => void;
 };
 
 const QuestionForm = (props: Props) => {
   const { onFinish } = props;
 
-  const handleSubmit = (values: Store) =>
-    onFinish(values.name, values.feature, values.weight);
+  const handleSubmit = (values: Partial<Question>) =>
+    onFinish({
+      ...values,
+      answers: []
+    });
 
   return (
     <Form name="survey" onFinish={handleSubmit}>
@@ -50,6 +52,18 @@ const QuestionForm = (props: Props) => {
         ]}
       >
         <Input />
+      </Form.Item>
+      <Form.Item
+        label="Причина"
+        name="reason"
+        rules={[
+          {
+            required: true,
+            message: 'Пожалуйста, введите причину вопроса'
+          }
+        ]}
+      >
+        <Input.TextArea rows={4} />
       </Form.Item>
       <Form.Item>
         <Button htmlType="submit" icon={<PlusOutlined />}>
