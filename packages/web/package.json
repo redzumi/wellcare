@@ -1,6 +1,6 @@
 {
   "name": "@wellcare/web",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "scripts": {
     "lint": "tsc --noEmit && eslint 'src/**/*.{js,ts,tsx}' --ignore-pattern '*.d.ts' --fix",
     "prebuild": "rimraf public && npm run build:server",
