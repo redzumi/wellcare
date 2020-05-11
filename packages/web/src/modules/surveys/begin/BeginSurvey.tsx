@@ -39,6 +39,7 @@ const BeginSurvey = () => {
   const { ready, data: surveys } = useStore($surveys);
   const currentSurvey = surveys.find((survey) => survey.id === id);
 
+  // TODO: save current state in localStorage / db
   const [isStarted, setIsStarted] = useState(false);
 
   useEffect(() => {

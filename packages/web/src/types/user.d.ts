@@ -3,6 +3,11 @@ declare const enum UserRole {
   Admin = 1
 }
 
+type ReasonReaction = {
+  surveyId: string;
+  feature: string;
+};
+
 type User = {
   email: string;
   password: string;

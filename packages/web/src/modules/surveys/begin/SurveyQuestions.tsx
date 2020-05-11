@@ -7,6 +7,7 @@ import { Store } from 'antd/lib/form/interface';
 import { $ui } from 'store/ui';
 import { $surveys, fetchSurveys } from 'store/surveys';
 import { sendSurveyQA } from 'store/surveys/actions';
+import { $reasons, fetchReasonReactions } from 'store/surveys/reasons';
 
 import Paper from 'common/page/paper/Paper';
 import SurveyReason from './SurveyReason';
@@ -19,6 +20,7 @@ const SurveyQuestions = () => {
   const { id } = useParams();
 
   const { media } = useStore($ui);
+  const reasons = useStore($reasons);
   const { ready, data: surveys } = useStore($surveys);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -29,6 +31,12 @@ const SurveyQuestions = () => {
       fetchSurveys();
     }
   }, [ready]);
+
+  useEffect(() => {
+    if (!reasons.surveys[id]) {
+      fetchReasonReactions(id);
+    }
+  }, [reasons.surveys]);
 
   if (!currentSurvey || !ready) {
     return (
@@ -69,7 +77,13 @@ const SurveyQuestions = () => {
               onComplete={handleMoveToNextQuestion}
             />
             <Divider dashed />
-            {currQuestion.reason && <SurveyReason text={currQuestion.reason} />}
+            {currQuestion.reason && (
+              <SurveyReason
+                feature={currQuestion.feature}
+                reactions={reasons.surveys[id]}
+                text={currQuestion.reason}
+              />
+            )}
           </Col>
         </Row>
       </Space>
