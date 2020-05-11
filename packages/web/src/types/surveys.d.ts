@@ -7,6 +7,7 @@ type Survey = {
 };
 
 type Question = {
+  _id?: string; // TODO: fix?
   name: string;
   feature: string;
   reason?: string

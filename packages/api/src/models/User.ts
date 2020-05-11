@@ -8,7 +8,9 @@ const UserSchema = new Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   username: { type: String, required: true },
-  role: { type: Number, require: true }
+  role: { type: Number, require: true },
+  reasonsLike: { type: Array, default: [] },
+  reasonsDislike: { type: Array, default: [] }
 });
 
 UserSchema.pre('save', async function (next: () => void) {

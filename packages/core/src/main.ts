@@ -1,7 +1,9 @@
-import data from './data';
-import { PredictData } from './data';
+type Feature = string;
+type QuestionWeight = number;
+type AnswerWeight = number;
 
-const main = async () => await estimateCovid(data);
+type SurveyQA = [Feature, QuestionWeight, AnswerWeight];
+type PredictData = SurveyQA[];
 
 // MAGIC :)
 export const estimateCovid = (data: PredictData) => {
@@ -12,5 +14,13 @@ export const estimateCovid = (data: PredictData) => {
 
   return overallProbability;
 };
+
+// Just for tests
+const main = async () =>
+  await estimateCovid([
+    ['курение', 0.05, 1],
+    ['гигиена', 0.1, 0.5],
+    ['италия', 0.3, 0]
+  ]);
 
 main();

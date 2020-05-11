@@ -18,6 +18,16 @@ docker start wellcare-db
 
 ```MOBILE_BREAKPOINT is 920```
 
+# eslint vscode
+
+```
+{
+ "eslint.workingDirectories": [
+   "packages/web/src"
+ ]
+}
+```
+
 ### TODO: 
 ```
 1. use classnames

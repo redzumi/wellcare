@@ -4,6 +4,7 @@ import { createStore, createEffect, Store } from 'effector';
 import jwtDecode from 'jwt-decode';
 
 const $session: Store<SessionState> = createStore({});
+$session.watch((state) => console.log(`[$SESSION]: `, state));
 
 const loginUser = createEffect<{ email: string; password: string }, string>({
   handler: async (loginData) => {
@@ -27,7 +28,7 @@ loginUser.fail.watch(() => {
   message.error('Что-то пошло не так');
 });
 
-const registerUser = createEffect<User, string>({
+const registerUser = createEffect<Partial<User>, string>({
   handler: async (registerData: User) => {
     const { data } = await axios.post('/api/v1/auth/signup', registerData);
     const { token } = data;

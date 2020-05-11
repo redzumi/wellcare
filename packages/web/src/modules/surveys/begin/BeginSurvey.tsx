@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useStore } from 'effector-react';
 
 import { $surveys, fetchSurveys } from 'store/surveys';
-import { beginSurveyQA } from 'store/surveysActions';
+import { beginSurveyQA } from 'store/surveys/actions';
 import CovidIcon from 'common/icons/covid/CovidIcon';
 import HealthIcon from 'common/icons/health/HealthIcon';
 
@@ -39,6 +39,7 @@ const BeginSurvey = () => {
   const { ready, data: surveys } = useStore($surveys);
   const currentSurvey = surveys.find((survey) => survey.id === id);
 
+  // TODO: save current state in localStorage / db
   const [isStarted, setIsStarted] = useState(false);
 
   useEffect(() => {

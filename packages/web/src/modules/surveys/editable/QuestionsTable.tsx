@@ -20,7 +20,7 @@ const QuestionsTable = (props: Props) => {
   };
 
   const handleQuestionDelete = (question: Question) => () => {
-    onChange(questions.filter((q) => q.feature !== question.feature));
+    onChange(questions.filter((q) => q._id !== question._id));
   };
 
   const handleCreateQuestion = (value: Question) => {
@@ -31,7 +31,7 @@ const QuestionsTable = (props: Props) => {
     onChange(
       questions.map((q) => ({
         ...q,
-        ...(q.feature === question.feature && question)
+        ...(q._id === question._id && question)
       }))
     );
     setCurrent(null);

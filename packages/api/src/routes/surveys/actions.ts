@@ -1,24 +1,12 @@
-import express, { Request, Response } from 'express';
+import express, { Request } from 'express';
 
 import { estimateCovid } from '@wellcare/core';
 import { PredictData } from '@wellcare/core/dist/data';
 
-import { SurveyActionModel } from '../models/SurveyAction';
-import { SurveyModel } from '../models/Survey';
+import { SurveyActionModel } from '../../models/SurveyAction';
+import { SurveyModel } from '../../models/Survey';
 
 const router = express.Router();
-
-const mongoCleaner = (
-  req: Request & { user: User },
-  res: Response,
-  next: () => void
-) => {
-  delete req.body._id;
-  delete req.body._vv;
-  next();
-};
-
-router.use(mongoCleaner);
 
 router.post('/:surveyId', async (req: Request & { user: User }, res, next) => {
   const { user, params } = req;
