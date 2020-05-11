@@ -81,6 +81,7 @@ const SurveyQuestions = () => {
             <Divider dashed />
             {currQuestion.reason && (
               <SurveyReason
+                key={currQuestion.feature}
                 id={id}
                 user={user}
                 feature={currQuestion.feature}
