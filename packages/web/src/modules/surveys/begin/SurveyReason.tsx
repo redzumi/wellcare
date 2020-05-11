@@ -53,12 +53,14 @@ const SurveyReason = (props: Props) => {
 
   const like = () => {
     makeReaction({ surveyId: id, feature, action: 'like' });
-    setAction('liked');
+    if (action === 'liked') setAction('');
+    else setAction('disliked');
   };
 
   const dislike = () => {
     makeReaction({ surveyId: id, feature, action: 'dislike' });
-    setAction('disliked');
+    if (action === 'disliked') setAction('');
+    else setAction('disliked');
   };
 
   const actions = reaction
