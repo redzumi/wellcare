@@ -1,5 +1,9 @@
 import express, { Request, Response } from 'express';
-import { SurveyModel } from '../models/Survey';
+
+import { SurveyModel } from '../../models/Survey';
+
+import actions from './actions';
+import reasons from './reasons';
 
 const router = express.Router();
 
@@ -14,6 +18,8 @@ const mongoCleaner = (
 };
 
 router.use(mongoCleaner);
+router.use('/actions', actions);
+router.use('/reasons', reasons);
 
 router.get('/', async (req: Request & { user: User }, res, next) => {
   try {

@@ -11,11 +11,11 @@ type User = {
   lastName: string;
   username: string;
   role: UserRole;
-  reasonsLike: ReasonAction[];
-  reasonDislike: ReasonAction[];
+  reasonsLike: ReasonReaction[];
+  reasonsDislike: ReasonReaction[];
 };
 
-type ReasonAction = {
+type ReasonReaction = {
   surveyId: string;
   feature: string;
 };

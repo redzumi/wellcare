@@ -11,5 +11,5 @@ type User = {
   username: string;
   role?: UserRole;
   reasonsLike: ReasonReaction[];
-  reasonDislike: ReasonReaction[];
+  reasonsDislike: ReasonReaction[];
 };
