@@ -1,17 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {
-  Row,
-  Col,
-  Card,
-  Space,
-  Radio,
-  Steps,
-  Popover,
-  Button,
-  Spin,
-  Form,
-  Breadcrumb
-} from 'antd';
+import { Row, Col, Space, Spin, Divider } from 'antd';
 import { useStore } from 'effector-react';
 import { useParams, Redirect } from 'react-router-dom';
 import { Store } from 'antd/lib/form/interface';
@@ -21,10 +9,11 @@ import { $surveys, fetchSurveys } from 'store/surveys';
 import { sendSurveyQA } from 'store/surveysActions';
 
 import Paper from 'common/page/paper/Paper';
+import SurveyReason from './SurveyReason';
+import SurveyProgress from './SurveyProgress';
 
 import styles from './styles.styl';
-
-const { Step } = Steps;
+import SurveyQuestionCard from './SurveyQuestionCard';
 
 const SurveyQuestions = () => {
   const { id } = useParams();
@@ -68,73 +57,25 @@ const SurveyQuestions = () => {
   return (
     <Paper>
       <Space direction="vertical" size="large" className={styles.questions}>
-        {media === UIMedia.Desktop ? (
-          <Steps current={currentIndex} size="small">
-            {questions.map((question) => (
-              <Step key={question.name} />
-            ))}
-          </Steps>
-        ) : (
-          <Breadcrumb>
-            <Breadcrumb.Item>{(currentIndex + 1).toString()}</Breadcrumb.Item>
-            <Breadcrumb.Item>{questions.length.toString()}</Breadcrumb.Item>
-          </Breadcrumb>
-        )}
+        <SurveyProgress
+          media={media}
+          currentIndex={currentIndex}
+          questions={questions}
+        />
         <Row justify="center">
           <Col span={media === UIMedia.Mobile ? 24 : 12}>
-            <Row justify="end">
-              {currQuestion.reason && (
-                <Popover
-                  content={
-                    <div style={{ maxWidth: '300px' }}>
-                      {currQuestion.reason}
-                    </div>
-                  }
-                  trigger="click"
-                >
-                  <Button type="link" style={{ paddingRight: 0 }}>
-                    Хотите узнать подробнее?
-                    <span> </span>
-                    <span
-                      style={{ paddingLeft: 8 }}
-                      role="img"
-                      aria-label="smile"
-                    >
-                      😉
-                    </span>
-                  </Button>
-                </Popover>
-              )}
-            </Row>
-            <Card title={currQuestion.name} className={styles.card}>
-              <Space direction="vertical" size="middle">
-                <Form
-                  key={currQuestion.feature}
-                  onFinish={handleMoveToNextQuestion}
-                >
-                  <Form.Item name="answer">
-                    <Radio.Group>
-                      <Space direction="vertical" size="middle">
-                        {currQuestion.answers.map((answer: Answer) => (
-                          <Radio
-                            key={answer.name}
-                            value={answer.feature}
-                            className={styles.radio}
-                          >
-                            {answer.name}
-                          </Radio>
-                        ))}
-                      </Space>
-                    </Radio.Group>
-                  </Form.Item>
-                  <Form.Item>
-                    <Button type="primary" htmlType="submit">
-                      Дальше
-                    </Button>
-                  </Form.Item>
-                </Form>
-              </Space>
-            </Card>
+            <SurveyQuestionCard
+              question={currQuestion}
+              onComplete={handleMoveToNextQuestion}
+            />
+            <Divider dashed />
+            {currQuestion.reason && (
+              <SurveyReason
+                likes={currQuestion.reasonLikes}
+                dislikes={currQuestion.reasonDislikes}
+                text={currQuestion.reason}
+              />
+            )}
           </Col>
         </Row>
       </Space>
