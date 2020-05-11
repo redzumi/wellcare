@@ -3,7 +3,7 @@ type QuestionWeight = number;
 type AnswerWeight = number;
 
 type SurveyQA = [Feature, QuestionWeight, AnswerWeight];
-type PredictData = SurveyQA[];
+export type PredictData = SurveyQA[];
 
 // MAGIC :)
 export const estimateCovid = (data: PredictData) => {

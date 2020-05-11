@@ -1,7 +1,6 @@
 import express, { Request } from 'express';
 
-import { estimateCovid } from '@wellcare/core';
-import { PredictData } from '@wellcare/core/dist/data';
+import { estimateCovid, PredictData } from '@wellcare/core';
 
 import { SurveyActionModel } from '../../models/SurveyAction';
 import { SurveyModel } from '../../models/Survey';
