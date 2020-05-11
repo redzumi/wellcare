@@ -10,6 +10,8 @@ type Question = {
   name: string;
   feature: string;
   reason?: string
+  reasonLikes: number;
+  reasonDislikes: number;
   weight: number;
   answers: Answer[];
 };

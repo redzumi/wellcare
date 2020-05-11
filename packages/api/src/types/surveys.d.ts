@@ -11,6 +11,8 @@ type Question = {
   name: string;
   weight: number;
   reason?: string;
+  reasonLikes: number;
+  reasonDislikes: number;
   feature: string;
   answers: Answer[];
 };

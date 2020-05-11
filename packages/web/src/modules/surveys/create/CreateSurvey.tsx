@@ -15,6 +15,8 @@ const SURVEY: Survey = {
       feature: 'weather',
       name: 'Как вам погода?',
       reason: 'Когда погода хорошая, то и настроение лучше ;)',
+      reasonLikes: 0,
+      reasonDislikes: 0,
       weight: 1,
       answers: []
     }
