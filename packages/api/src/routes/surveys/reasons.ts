@@ -27,17 +27,40 @@ router.get('/:surveyId', async (req: Request, res) => {
       users: User[],
       field: 'reasonsLike' | 'reasonsDislike'
     ): {} => {
-      return users.reduce((acc: { [key: string]: string[] }, curr: User) => {
-        const reaction = curr[field].find((like) => like.surveyId === surveyId);
+      const surveyReactions: ReasonReaction[] = users.reduce(
+        (acc, curr: User) => {
+          const userReactions = curr[field];
+          const reactions = userReactions.filter(
+            (r) => r.surveyId === surveyId
+          );
 
-        if (!reaction) return acc;
-        const feature = reaction.feature;
+          if (reactions.length <= 0) return acc;
 
-        return {
-          ...acc,
-          [feature]: [...(acc[feature] ? acc[feature] : []), curr.username]
-        };
-      }, {});
+          return [
+            ...acc,
+            ...reactions.map((r) => ({
+              ...r,
+              username: curr.username
+            }))
+          ];
+        },
+        []
+      );
+
+      return surveyReactions.reduce(
+        (
+          acc: { [key: string]: [] },
+          curr: ReasonReaction & {
+            username: string;
+          }
+        ): { [key: string]: {} } => {
+          return {
+            ...acc,
+            [curr.feature]: [...(acc[curr.feature] || []), curr.username]
+          };
+        },
+        {}
+      );
     };
 
     res.json({
@@ -58,29 +81,44 @@ router.post(
     try {
       const currentUser = await UserModel.findOne({ _id: user._id });
 
-      if (action === 'like') {
-        const update = {
-          reasonsLike: [...currentUser.reasonsLike, { surveyId, feature }],
-          reasonsDislike: currentUser.reasonsDislike.filter(
-            (dislike: ReasonReaction) => dislike.surveyId !== surveyId
+      const handle = async (sourceField: string, targetField: string) => {
+        if (
+          currentUser[sourceField].some(
+            (reaction: ReasonReaction) =>
+              reaction.surveyId === surveyId && reaction.feature === feature
           )
-        };
+        ) {
+          const update = {
+            [sourceField]: currentUser[sourceField].filter(
+              (reaction: ReasonReaction) =>
+                !(
+                  reaction.surveyId === surveyId && reaction.feature === feature
+                )
+            )
+          };
 
-        await UserModel.findOneAndUpdate({ _id: user._id }, update);
+          await UserModel.findOneAndUpdate({ _id: user._id }, update);
+        } else {
+          const update = {
+            [sourceField]: [...currentUser[sourceField], { surveyId, feature }],
+            [targetField]: currentUser[targetField].filter(
+              (reaction: ReasonReaction) =>
+                !(
+                  reaction.surveyId === surveyId && reaction.feature === feature
+                )
+            )
+          };
+
+          await UserModel.findOneAndUpdate({ _id: user._id }, update);
+        }
+      };
+
+      if (action === 'like') {
+        handle('reasonsLike', 'reasonsDislike');
       }
 
       if (action === 'dislike') {
-        const update = {
-          reasonsDislike: [
-            ...currentUser.reasonsDislike,
-            { surveyId, feature }
-          ],
-          reasonsLike: currentUser.reasonsLike.filter(
-            (dislike: ReasonReaction) => dislike.surveyId !== surveyId
-          )
-        };
-
-        await UserModel.findOneAndUpdate({ _id: user._id }, update);
+        handle('reasonsDislike', 'reasonsLike');
       }
 
       res.json({ success: true });
