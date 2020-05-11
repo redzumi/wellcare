@@ -30,7 +30,7 @@ const SurveyQuestions = () => {
 
   useEffect(() => {
     if (!reactions[id]) fetchReasonReactions(id);
-  }, [reactions]);
+  }, [reactions, id]);
 
   if (!currentSurvey || !ready) {
     return (

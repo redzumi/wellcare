@@ -81,7 +81,7 @@ const SurveyReason = (props: Props) => {
           </Tooltip>
         </Space>
       ]
-    : [<Spin spinning />];
+    : [<Spin key="actions" spinning />];
 
   return (
     <Card>

@@ -21,6 +21,7 @@
     "import/prefer-default-export": "off",
     "no-return-await": "off",
     "no-console": "off",
+    "no-underscore-dangle": "off",
     "comma-dangle": ["error", "never"],
     "object-curly-spacing": ["error", "always"],
     "@typescript-eslint/explicit-function-return-type": "off",
@@ -37,6 +38,7 @@
       "error",
       { "extensions": [".jsx", ".tsx"] }
     ],
+    "react/jsx-indent": "off",
     "react/jsx-wrap-multilines": "off",
     "react/button-has-type": "off",
     "react/destructuring-assignment": "off",
