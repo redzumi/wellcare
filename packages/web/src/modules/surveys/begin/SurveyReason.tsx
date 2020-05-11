@@ -50,7 +50,7 @@ const SurveyReason = (props: Props) => {
         setAction('disliked');
       }
     }
-  }, [reaction]);
+  }, [reaction, feature, user]);
 
   const like = () => {
     makeReaction({ surveyId: id, feature, action: 'like' });
