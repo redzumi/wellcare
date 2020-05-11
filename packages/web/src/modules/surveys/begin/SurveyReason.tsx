@@ -8,8 +8,6 @@ import {
 } from '@ant-design/icons';
 
 type Props = {
-  likes: number;
-  dislikes: number;
   text: string;
 };
 
@@ -19,8 +17,8 @@ const { Title } = Typography;
 const SurveyReason = (props: Props) => {
   const { text } = props;
 
-  const [likes, setLikes] = useState(props.likes);
-  const [dislikes, setDislikes] = useState(props.dislikes);
+  const [likes, setLikes] = useState(0);
+  const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState<string>('');
 
   const like = () => {
