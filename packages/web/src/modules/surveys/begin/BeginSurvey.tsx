@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useStore } from 'effector-react';
 
 import { $surveys, fetchSurveys } from 'store/surveys';
-import { beginSurveyQA } from 'store/surveysActions';
+import { beginSurveyQA } from 'store/surveys/actions';
 import CovidIcon from 'common/icons/covid/CovidIcon';
 import HealthIcon from 'common/icons/health/HealthIcon';
 

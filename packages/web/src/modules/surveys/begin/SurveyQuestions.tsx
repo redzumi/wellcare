@@ -6,7 +6,7 @@ import { Store } from 'antd/lib/form/interface';
 
 import { $ui } from 'store/ui';
 import { $surveys, fetchSurveys } from 'store/surveys';
-import { sendSurveyQA } from 'store/surveysActions';
+import { sendSurveyQA } from 'store/surveys/actions';
 
 import Paper from 'common/page/paper/Paper';
 import SurveyReason from './SurveyReason';
