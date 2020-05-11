@@ -3,6 +3,7 @@ import { message } from 'antd';
 import { createStore, createEffect, Store } from 'effector';
 
 const $reasons: Store<ReasonsState> = createStore({ surveys: {} });
+$reasons.watch((state) => console.log(`[$REASONS]: `, state));
 
 const fetchReasonReactions = createEffect<
   string,

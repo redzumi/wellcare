@@ -4,6 +4,7 @@ import { createStore, createEffect, Store } from 'effector';
 import jwtDecode from 'jwt-decode';
 
 const $session: Store<SessionState> = createStore({});
+$session.watch((state) => console.log(`[$SESSION]: `, state));
 
 const loginUser = createEffect<{ email: string; password: string }, string>({
   handler: async (loginData) => {
