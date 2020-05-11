@@ -1,12 +1,16 @@
 type ReasonsState = {
-  surveys: {
-    [key: string]: {
-      likes: {
-        [key: string]: string[];
-      };
-      dislikes: {
-        [key: string]: string[];
-      };
-    };
+  surveys: SurveyReasonReactions;
+};
+
+type SurveyReasonReactions = {
+  [key: string]: SurveyReasonReaction;
+};
+
+type SurveyReasonReaction = {
+  likes: {
+    [key: string]: string[];
+  };
+  dislikes: {
+    [key: string]: string[];
   };
 };

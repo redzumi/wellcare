@@ -9,13 +9,7 @@ const fetchReasonReactions = createEffect<
   string,
   {
     surveyId: string;
-    likes: {
-      [key: string]: string[];
-    };
-    dislikes: {
-      [key: string]: string[];
-    };
-  }
+  } & SurveyReasonReaction
 >({
   handler: async (surveyId) => {
     const { data } = await axios.get(`/api/v1/surveys/reasons/${surveyId}`);
@@ -44,13 +38,7 @@ const makeReaction = createEffect<
   { surveyId: string; feature: string; action: string },
   {
     surveyId: string;
-    likes: {
-      [key: string]: string[];
-    };
-    dislikes: {
-      [key: string]: string[];
-    };
-  }
+  } & SurveyReasonReaction
 >({
   handler: async (reactionData) => {
     const { surveyId, feature, action } = reactionData;

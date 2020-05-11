@@ -20,30 +20,23 @@ type Props = {
   id: string;
   feature: string;
   user: User;
-  reactions: {
-    likes: {
-      [key: string]: string[];
-    };
-    dislikes: {
-      [key: string]: string[];
-    };
-  };
+  reaction: SurveyReasonReaction;
   text: string;
 };
 
 const { Title } = Typography;
 
 const SurveyReason = (props: Props) => {
-  const { id, feature, user, text, reactions } = props;
+  const { id, feature, user, text, reaction } = props;
 
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
   const [action, setAction] = useState<string>('');
 
   useEffect(() => {
-    if (reactions) {
-      const usersLikes = reactions.likes[feature];
-      const usersDislikes = reactions.dislikes[feature];
+    if (reaction) {
+      const usersLikes = reaction.likes[feature];
+      const usersDislikes = reaction.dislikes[feature];
 
       setLikes(usersLikes ? usersLikes.length : 0);
       setDislikes(usersDislikes ? usersDislikes.length : 0);
@@ -56,7 +49,7 @@ const SurveyReason = (props: Props) => {
         setAction('disliked');
       }
     }
-  }, [reactions]);
+  }, [reaction]);
 
   const like = () => {
     makeReaction({ surveyId: id, feature, action: 'like' });
@@ -68,7 +61,7 @@ const SurveyReason = (props: Props) => {
     setAction('disliked');
   };
 
-  const actions = reactions
+  const actions = reaction
     ? [
         <Space key="actions">
           <Tooltip title="Мне понравилось">
