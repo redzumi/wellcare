@@ -15,6 +15,7 @@ type Props = {
 
 const { Title } = Typography;
 
+// TODO: fetch likes and dislikes
 const SurveyReason = (props: Props) => {
   const { text } = props;
 

@@ -1,3 +1,8 @@
+declare const enum UserRole {
+  Default = 0,
+  Admin = 1
+}
+
 type User = {
   email: string;
   password: string;
@@ -5,9 +10,11 @@ type User = {
   lastName: string;
   username: string;
   role?: UserRole;
+  reasonsLike: ReasonAction[];
+  reasonDislike: ReasonAction[];
 };
 
-declare const enum UserRole {
-  Default = 0,
-  Admin = 1
-}
+type ReasonAction = {
+  surveyId: string;
+  feature: string;
+};

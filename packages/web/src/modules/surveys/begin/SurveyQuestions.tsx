@@ -69,13 +69,6 @@ const SurveyQuestions = () => {
               onComplete={handleMoveToNextQuestion}
             />
             <Divider dashed />
-            {currQuestion.reason && (
-              <SurveyReason
-                likes={currQuestion.reasonLikes}
-                dislikes={currQuestion.reasonDislikes}
-                text={currQuestion.reason}
-              />
-            )}
           </Col>
         </Row>
       </Space>

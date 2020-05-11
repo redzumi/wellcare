@@ -11,8 +11,6 @@ const SurveySchema = new Schema({
       weight: Number,
       feature: String,
       reason: { type: String, required: false },
-      reasonLikes: { type: Number, default: 0 },
-      reasonDislikes: { type: Number, default: 0 },
       answers: [
         {
           name: String,

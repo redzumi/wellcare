@@ -27,7 +27,7 @@ loginUser.fail.watch(() => {
   message.error('Что-то пошло не так');
 });
 
-const registerUser = createEffect<User, string>({
+const registerUser = createEffect<Partial<User>, string>({
   handler: async (registerData: User) => {
     const { data } = await axios.post('/api/v1/auth/signup', registerData);
     const { token } = data;
