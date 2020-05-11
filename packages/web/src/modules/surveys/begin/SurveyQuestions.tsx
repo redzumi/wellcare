@@ -8,6 +8,7 @@ import { $ui } from 'store/ui';
 import { $surveys, fetchSurveys } from 'store/surveys';
 import { sendSurveyQA } from 'store/surveys/actions';
 import { $reasons, fetchReasonReactions } from 'store/surveys/reasons';
+import { $session } from 'store/session';
 
 import Paper from 'common/page/paper/Paper';
 import SurveyReason from './SurveyReason';
@@ -21,6 +22,7 @@ const SurveyQuestions = () => {
 
   const { media } = useStore($ui);
   const reasons = useStore($reasons);
+  const { user } = useStore($session);
   const { ready, data: surveys } = useStore($surveys);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -49,7 +51,7 @@ const SurveyQuestions = () => {
   const { questions } = currentSurvey;
   const currQuestion = questions[currentIndex];
 
-  if (!currQuestion) {
+  if (!currQuestion || !user) {
     return <Redirect to={`/surveys/finish/${id}`} />;
   }
 
@@ -80,6 +82,7 @@ const SurveyQuestions = () => {
             {currQuestion.reason && (
               <SurveyReason
                 id={id}
+                user={user}
                 feature={currQuestion.feature}
                 reactions={reasons.surveys[id]}
                 text={currQuestion.reason}

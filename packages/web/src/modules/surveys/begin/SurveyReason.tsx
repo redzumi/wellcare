@@ -19,6 +19,7 @@ import { makeReaction } from 'store/surveys/reasons';
 type Props = {
   id: string;
   feature: string;
+  user: User;
   reactions: {
     likes: {
       [key: string]: string[];
@@ -33,7 +34,7 @@ type Props = {
 const { Title } = Typography;
 
 const SurveyReason = (props: Props) => {
-  const { id, feature, text, reactions } = props;
+  const { id, feature, user, text, reactions } = props;
 
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
@@ -41,16 +42,18 @@ const SurveyReason = (props: Props) => {
 
   useEffect(() => {
     if (reactions) {
-      if (reactions.likes[feature]) {
-        setLikes(reactions.likes[feature].length || 0);
-      } else {
-        setLikes(0);
+      const usersLikes = reactions.likes[feature];
+      const usersDislikes = reactions.dislikes[feature];
+
+      setLikes(usersLikes ? usersLikes.length : 0);
+      setDislikes(usersDislikes ? usersDislikes.length : 0);
+
+      if (usersLikes && usersLikes.includes(user.username)) {
+        setAction('liked');
       }
 
-      if (reactions.dislikes[feature]) {
-        setDislikes(reactions.dislikes[feature].length || 0);
-      } else {
-        setDislikes(0);
+      if (usersDislikes && usersDislikes.includes(user.username)) {
+        setAction('disliked');
       }
     }
   }, [reactions]);
