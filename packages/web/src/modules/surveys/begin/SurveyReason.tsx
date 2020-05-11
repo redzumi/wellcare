@@ -14,8 +14,10 @@ import {
   DislikeFilled,
   LikeFilled
 } from '@ant-design/icons';
+import { makeReaction } from 'store/surveys/reasons';
 
 type Props = {
+  id: string;
   feature: string;
   reactions: {
     likes: {
@@ -31,7 +33,7 @@ type Props = {
 const { Title } = Typography;
 
 const SurveyReason = (props: Props) => {
-  const { feature, text, reactions } = props;
+  const { id, feature, text, reactions } = props;
 
   const [likes, setLikes] = useState(0);
   const [dislikes, setDislikes] = useState(0);
@@ -39,22 +41,27 @@ const SurveyReason = (props: Props) => {
 
   useEffect(() => {
     if (reactions) {
-      if (reactions.likes[feature])
+      if (reactions.likes[feature]) {
         setLikes(reactions.likes[feature].length || 0);
-      if (reactions.dislikes[feature])
+      } else {
+        setLikes(0);
+      }
+
+      if (reactions.dislikes[feature]) {
         setDislikes(reactions.dislikes[feature].length || 0);
+      } else {
+        setDislikes(0);
+      }
     }
   }, [reactions]);
 
   const like = () => {
-    setLikes(1);
-    setDislikes(0);
+    makeReaction({ surveyId: id, feature, action: 'like' });
     setAction('liked');
   };
 
   const dislike = () => {
-    setLikes(0);
-    setDislikes(1);
+    makeReaction({ surveyId: id, feature, action: 'dislike' });
     setAction('disliked');
   };
 
