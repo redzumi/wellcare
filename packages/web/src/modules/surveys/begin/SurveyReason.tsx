@@ -6,7 +6,8 @@ import {
   Typography,
   Button,
   Space,
-  Spin
+  Spin,
+  Card
 } from 'antd';
 import {
   DislikeOutlined,
@@ -83,12 +84,14 @@ const SurveyReason = (props: Props) => {
     : [<Spin spinning />];
 
   return (
-    <Comment
-      actions={actions}
-      author={<Title level={4}>Мнение врача</Title>}
-      avatar={<Avatar src="/assets/doc.jpg" alt="Доктор" />}
-      content={<p>{text}</p>}
-    />
+    <Card>
+      <Comment
+        actions={actions}
+        author={<Title level={4}>Мнение врача</Title>}
+        avatar={<Avatar src="/assets/doc.jpg" alt="Доктор" />}
+        content={<p>{text}</p>}
+      />
+    </Card>
   );
 };
 
